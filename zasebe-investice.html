@@ -1312,7 +1312,7 @@ input[type=range] { width: 100%; height: 3px; }
   <div id="mkt-crypto" class="reveal">
     <div class="mkt-table" style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
       <div class="mkt-head mkt-grid-crypto">
-        <span>#</span><span>Název</span>
+        <span>Název</span>
         <span class="tar">Cena</span>
         <span class="tar">24 h</span>
         <span class="tar hide-md">7 dní</span>
@@ -1368,7 +1368,7 @@ input[type=range] { width: 100%; height: 3px; }
 .mkt-row:hover{background:rgba(201,168,76,.03);}
 
 /* CRYPTO: #, Logo+Name, Cena, 24h, 7d, Měsíc, YTD, 1R */
-.mkt-grid-crypto{display:grid;grid-template-columns:28px 1fr 130px 88px 88px 88px 88px 88px;gap:8px;align-items:center;}
+.mkt-grid-crypto{display:grid;grid-template-columns:1fr 130px 88px 88px 88px 88px 88px;gap:8px;align-items:center;}
 /* STOCKS: Ticker, Name, Cena, 24h, 7d, Měsíc, YTD, 1R */
 .mkt-grid-stocks{display:grid;grid-template-columns:65px 1fr 130px 88px 88px 88px 88px 88px;gap:8px;align-items:center;}
 
@@ -1391,7 +1391,7 @@ input[type=range] { width: 100%; height: 3px; }
 /* ≤1100px — skryj YTD a 1R */
 @media(max-width:1100px){
   .hide-lg{display:none!important;}
-  .mkt-grid-crypto{grid-template-columns:28px 1fr 120px 80px 80px 80px!important;}
+  .mkt-grid-crypto{grid-template-columns:1fr 120px 80px 80px 80px!important;}
   .mkt-grid-stocks{grid-template-columns:60px 1fr 120px 80px 80px 80px!important;}
 }
 /* ≤900px — skryj i 7d a Měsíc, nech jen Cena + 24h */
@@ -1399,7 +1399,7 @@ input[type=range] { width: 100%; height: 3px; }
   #live-markets{padding:60px 24px!important;}
   #live-markets>div:first-child{grid-template-columns:1fr!important;gap:24px!important;}
   .hide-md{display:none!important;}
-  .mkt-grid-crypto{grid-template-columns:24px 1fr 105px 72px!important;gap:6px!important;}
+  .mkt-grid-crypto{grid-template-columns:1fr 105px 72px!important;gap:6px!important;}
   .mkt-grid-stocks{grid-template-columns:48px 1fr 100px 72px!important;gap:6px!important;}
   .mkt-tab{padding:10px 16px!important;font-size:9px!important;}
   .mkt-head{padding:10px 14px!important;font-size:8px!important;letter-spacing:1.5px!important;}
@@ -1415,7 +1415,7 @@ input[type=range] { width: 100%; height: 3px; }
 }
 @media(max-width:480px){
   #live-markets{padding:40px 16px!important;}
-  .mkt-grid-crypto{grid-template-columns:20px 1fr 82px 58px!important;gap:4px!important;}
+  .mkt-grid-crypto{grid-template-columns:1fr 82px 58px!important;gap:4px!important;}
   .mkt-grid-stocks{grid-template-columns:38px 1fr 78px 58px!important;gap:4px!important;}
   .mkt-head{padding:8px 10px!important;font-size:7px!important;}
   .mkt-row{padding:9px 10px!important;}
@@ -1545,7 +1545,6 @@ input[type=range] { width: 100%; height: 3px; }
       const logo = c.image || '';
       return `
       <div class="mkt-row mkt-grid-crypto">
-        <span class="mkt-rank">${i+1}</span>
         <div class="mkt-coin-info">
           ${logo ? `<img class="mkt-coin-logo" src="${logo}" alt="${c.symbol}" loading="lazy" onerror="this.style.display='none'">` : '<div class="mkt-coin-logo"></div>'}
           <div class="mkt-coin-text">
