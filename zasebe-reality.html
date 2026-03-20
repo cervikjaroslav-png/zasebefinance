@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-<link rel="icon" type="image/png" href="favicon.png">
 <meta charset="UTF-8">
+<link rel="icon" type="image/png" href="favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reality — Zasebe Finance</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -459,7 +459,7 @@
   /* PADDING FIXES */
   section[style*="padding:100px 60px"] { padding: 50px 24px !important; }
   section[style*="padding:110px 60px"] { padding: 50px 24px !important; }
-  div[style*="padding:100px 60px"] { padding: 50px 24px !important; }
+  section[style*="padding:60px 60px"] { padding: 40px 24px !important; }  div[style*="padding:100px 60px"] { padding: 50px 24px !important; }
 
   /* CURSOR — hide on mobile */
   .cursor, .cursor-ring { display: none !important; }
@@ -1230,7 +1230,7 @@
   // Cursor — only on desktop
   const cursor = document.getElementById('cursor');
   const ring   = document.getElementById('cursorRing');
-  if (cursor && ring && window.innerWidth > 768) {
+  if (cursor && ring && window.innerWidth > 1200) {
     let mx=0,my=0,rx=0,ry=0;
     document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
     (function animCursor(){
