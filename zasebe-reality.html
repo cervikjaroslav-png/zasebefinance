@@ -1171,6 +1171,324 @@
   </div>
 </section>
 
+<!-- SAZBY & INFLACE -->
+<section style="padding:100px 60px;background:var(--dark2);border-top:1px solid rgba(201,168,76,.1);">
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-bottom:56px;" class="reveal rt-header">
+    <div>
+      <div class="section-tag"><span>Makroekonomika</span></div>
+      <h2 class="section-title">Sazby & <em>inflace</em><br>v číslech</h2>
+    </div>
+    <p style="font-size:15px;line-height:1.9;color:rgba(245,240,232,.6);font-weight:300;align-self:end;">
+      Hypoteční sazby a inflace jsou dva klíčové faktory každého realitního rozhodnutí.
+      Sledujte vývoj a <strong style="color:var(--gold);font-weight:500;">rozhodujte se se znalostí kontextu</strong> — ne jen na základě aktuální nabídky banky.
+    </p>
+  </div>
+
+  <!-- Tabs -->
+  <div style="display:flex;gap:2px;margin-bottom:32px;" class="reveal rt-tabs">
+    <button class="rt-tab active" onclick="rtShow('hypo',this)">🏠 Hypoteční sazby ČR</button>
+    <button class="rt-tab" onclick="rtShow('inflace',this)">📊 Inflace ČR</button>
+    <button class="rt-tab" onclick="rtShow('eu',this)">🇪🇺 Sazby ECB</button>
+  </div>
+
+  <!-- Chart wrapper -->
+  <div class="reveal rt-chart-wrap" style="position:relative;background:var(--black);border:1px solid rgba(201,168,76,.12);padding:40px 40px 32px;">
+    <div style="position:absolute;top:0;left:0;width:32px;height:32px;border-top:2px solid var(--gold);border-left:2px solid var(--gold);"></div>
+    <div style="position:absolute;bottom:0;right:0;width:32px;height:32px;border-bottom:2px solid var(--gold);border-right:2px solid var(--gold);"></div>
+
+    <canvas id="rtChart" style="width:100%;height:340px;max-height:340px;"></canvas>
+
+    <!-- Legenda -->
+    <div id="rt-legend" style="display:flex;gap:32px;margin-top:28px;padding-top:22px;border-top:1px solid rgba(201,168,76,.07);flex-wrap:wrap;"></div>
+  </div>
+
+  <!-- Info boxy -->
+  <div id="rt-info" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:2px;"></div>
+
+  <!-- Vysvětlivky -->
+  <div id="rt-explain" style="margin-top:2px;"></div>
+
+  <!-- Zdroj -->
+  <p style="margin-top:16px;font-size:11px;color:rgba(245,240,232,.2);font-style:italic;" class="reveal">
+    * Data jsou orientační, sestavená z veřejně dostupných zdrojů (ČNB, ČSÚ, ECB). Aktuální sazby vždy ověřte přímo u banky nebo finančního poradce.
+  </p>
+
+</section>
+
+<style>
+.rt-tab {
+  background:var(--dark3);border:none;
+  color:rgba(245,240,232,.4);
+  padding:12px 28px;
+  font-family:'Montserrat',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:400;
+  cursor:pointer;transition:all .3s;border-bottom:2px solid transparent;
+}
+.rt-tab:hover{color:rgba(245,240,232,.7);background:rgba(201,168,76,.04);}
+.rt-tab.active{color:var(--gold);border-bottom-color:var(--gold);background:rgba(201,168,76,.07);}
+.rt-info-box{background:var(--dark2);padding:28px 32px;border-top:2px solid rgba(201,168,76,.15);}
+.rt-info-box.highlight{border-top-color:var(--gold);background:rgba(201,168,76,.05);}
+.rt-info-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(245,240,232,.3);margin-bottom:10px;}
+.rt-info-val{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:var(--gold);line-height:1;}
+.rt-info-sub{font-size:12px;color:rgba(245,240,232,.4);margin-top:8px;line-height:1.6;}
+/* ── SAZBY & INFLACE — Tablet ── */
+@media(max-width:1200px){
+  .rt-header{grid-template-columns:1fr!important;gap:20px!important;margin-bottom:36px!important;}
+  .rt-tabs{flex-wrap:wrap!important;}
+  .rt-tab{font-size:9px!important;padding:10px 16px!important;}
+  .rt-chart-wrap{padding:24px 18px 20px!important;}
+  canvas#rtChart{height:260px!important;max-height:260px!important;}
+  .rt-info-val{font-size:30px!important;}
+  .rt-info-box{padding:20px 22px!important;}
+  #rt-explain>div{grid-template-columns:1fr!important;}
+}
+/* ── SAZBY & INFLACE — Phone ── */
+@media(max-width:768px){
+  .rt-tab{font-size:8px!important;padding:9px 12px!important;letter-spacing:1.5px!important;}
+  canvas#rtChart{height:220px!important;max-height:220px!important;}
+  #rt-info{grid-template-columns:1fr!important;}
+  .rt-info-val{font-size:28px!important;}
+  .rt-info-box{padding:18px 20px!important;}
+  .rt-info-label{font-size:8px!important;letter-spacing:2px!important;}
+  .rt-info-sub{font-size:11px!important;}
+  #rt-legend{gap:16px 24px!important;}
+  #rt-legend span{font-size:11px!important;}
+}
+/* ── SAZBY & INFLACE — Small phone ── */
+@media(max-width:480px){
+  .rt-tab{font-size:7px!important;padding:8px 10px!important;letter-spacing:1px!important;}
+  canvas#rtChart{height:180px!important;max-height:180px!important;}
+  .rt-info-val{font-size:24px!important;}
+  #rt-legend{flex-direction:column!important;gap:10px!important;}
+}
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+(function(){
+
+  // ── DATA ─────────────────────────────────────────────────────
+  // Hypoteční sazby ČR — průměr 5letá fix (zdroj: ČNB / Hypoindex)
+  const hypoData = {
+    labels:['01/20','07/20','01/21','07/21','01/22','07/22','01/23','07/23','01/24','07/24','01/25','03/25'],
+    datasets:[
+      {
+        label:'5letá fixace',
+        data:[2.50, 2.15, 2.05, 2.40, 3.60, 5.20, 5.85, 6.10, 5.60, 5.10, 4.80, 4.70],
+        color:'rgba(201,168,76,1)', fill:'rgba(201,168,76,0.10)'
+      },
+      {
+        label:'2letá fixace',
+        data:[2.30, 2.00, 1.95, 2.60, 4.20, 6.10, 6.50, 6.80, 6.00, 5.50, 5.10, 4.95],
+        color:'rgba(150,180,220,0.8)', fill:'rgba(150,180,220,0.06)'
+      },
+      {
+        label:'Repo sazba ČNB',
+        data:[2.25, 0.25, 0.25, 0.50, 3.75, 7.00, 7.00, 7.00, 6.75, 4.75, 3.75, 3.75],
+        color:'rgba(240,120,80,0.75)', fill:'rgba(240,120,80,0.05)'
+      }
+    ],
+    info:[
+      {label:'Aktuální 5Y fixace',val:'~4,70 %',sub:'Průměr trhu (03/2025)',hl:true},
+      {label:'Repo sazba ČNB',val:'3,75 %',sub:'Platné od 12/2024',hl:false},
+      {label:'Trend',val:'↘ Klesá',sub:'Sazby postupně mírní od peak 7 % v 2023',hl:false}
+    ]
+  };
+
+  // Inflace ČR — meziroční % (zdroj: ČSÚ)
+  const inflaceData = {
+    labels:['01/20','07/20','01/21','07/21','01/22','07/22','01/23','07/23','01/24','07/24','01/25','02/25'],
+    datasets:[
+      {
+        label:'Meziroční inflace ČR (%)',
+        data:[3.6, 3.4, 2.2, 3.4, 8.8, 17.5, 17.5, 8.8, 2.9, 2.2, 2.8, 2.7],
+        color:'rgba(201,168,76,1)', fill:'rgba(201,168,76,0.12)'
+      },
+      {
+        label:'Cíl ČNB (2 %)',
+        data:[2,2,2,2,2,2,2,2,2,2,2,2],
+        color:'rgba(74,222,128,0.5)', fill:false,
+        dash:[8,4]
+      }
+    ],
+    info:[
+      {label:'Inflace 02/2025',val:'2,7 %',sub:'Meziroční změna CPI',hl:true},
+      {label:'Cíl ČNB',val:'2,0 %',sub:'Toleranční pásmo ±1 %',hl:false},
+      {label:'Peak inflace',val:'17,5 %',sub:'Leden 2023 — nejvyšší za 30 let',hl:false}
+    ]
+  };
+
+  // Sazby ECB
+  const ecbData = {
+    labels:['01/20','07/20','01/21','07/21','01/22','07/22','01/23','07/23','01/24','07/24','01/25','03/25'],
+    datasets:[
+      {
+        label:'Deposit facility rate ECB',
+        data:[0.00,-0.50,-0.50,-0.50,-0.50, 0.00, 2.50, 3.75, 4.00, 3.75, 2.75, 2.50],
+        color:'rgba(201,168,76,1)', fill:'rgba(201,168,76,0.10)'
+      },
+      {
+        label:'Euribor 3M',
+        data:[-0.35,-0.50,-0.55,-0.55,-0.55, 0.20, 2.60, 3.90, 3.90, 3.55, 2.60, 2.40],
+        color:'rgba(150,180,220,0.8)', fill:'rgba(150,180,220,0.05)'
+      }
+    ],
+    info:[
+      {label:'ECB deposit rate',val:'2,50 %',sub:'Platné od 03/2025',hl:true},
+      {label:'Euribor 3M',val:'~2,40 %',sub:'Klíčový pro EUR hypotéky',hl:false},
+      {label:'Trend',val:'↘ Klesá',sub:'ECB snižuje sazby od 09/2024',hl:false}
+    ]
+  };
+
+  const EXPLAINS = {
+    hypo: [
+      {
+        term: 'Co je hypoteční sazba?',
+        text: 'Hypoteční sazba je úrok, který platíte bance za zapůjčené peníze na koupi nemovitosti. Čím nižší sazba, tím nižší měsíční splátka. Například při hypotéce 3 000 000 Kč na 30 let znamená rozdíl 1 % rozdíl přibližně 1 500 Kč v měsíční splátce — a statisíce korun za celou dobu splácení.'
+      },
+      {
+        term: 'Co je fixace?',
+        text: 'Fixace je doba, po kterou vám banka garantuje stejnou sazbu. Nejčastěji 2, 3 nebo 5 let. Po skončení fixace banka nabídne novou sazbu podle aktuálního trhu — proto se vyplatí sledovat vývoj sazeb dlouhodobě a refinancovat ve správný moment.'
+      },
+      {
+        term: 'Co je repo sazba ČNB?',
+        text: 'Repo sazba je základní úroková sazba České národní banky — „cena peněz" pro komerční banky. Když ČNB repo sazbu zvyšuje, zdražují se úvěry a hypotéky. Když ji snižuje, banky mohou nabídnout levnější hypotéky. Právě proto je důležité sledovat rozhodnutí ČNB.'
+      }
+    ],
+    inflace: [
+      {
+        term: 'Co je inflace?',
+        text: 'Inflace je zjednodušeně řečeno zdražování. Pokud je inflace 10 %, znamená to, že za stejné zboží zaplatíte o 10 % více než před rokem. Pro investory je to klíčový ukazatel — peníze nečinně ležící na účtu inflací ztrácejí hodnotu. Proto se vyplatí investovat.'
+      },
+      {
+        term: 'Proč je inflace důležitá pro nemovitosti?',
+        text: 'Nemovitosti jsou tradičně považovány za ochranu proti inflaci — jejich hodnota zpravidla roste spolu s cenami. Zároveň ale vysoká inflace vedla k rychlému zdražení hypoték (viz 2022–2023), což ochlodilo poptávku. Dnes, kdy inflace klesá k cíli ČNB 2 %, se sazby postupně normalizují.'
+      },
+      {
+        term: 'Cíl ČNB 2 %',
+        text: 'Česká národní banka se snaží udržet inflaci okolo 2 % ročně. Je to tzv. inflační cíl — dost vysoký na to, aby ekonomika rostla, ale dost nízký na to, aby peníze výrazně neztrácely hodnotu. Pokud inflace výrazně překročí 2 %, ČNB zpravidla zvýší úrokové sazby.'
+      }
+    ],
+    eu: [
+      {
+        term: 'Co je ECB a její sazby?',
+        text: 'ECB (Evropská centrální banka) je „ČNB celé eurozóny". Stanovuje základní úrokové sazby pro všechny země, které používají euro. Její rozhodnutí ovlivňují cenu hypoték v Německu, Francii, Slovensku i dalších zemích EU — a nepřímo i náladu na celých evropských trzích.'
+      },
+      {
+        term: 'Co je Euribor?',
+        text: 'Euribor je průměrná sazba, za kterou si evropské banky půjčují peníze navzájem. Slouží jako referenční sazba pro variabilní hypotéky v eurozóně — pokud má klient variabilní hypotéku v EUR, jeho splátka se mění právě podle Euriboru. Euribor 3M znamená sazbu na tříměsíční výpůjčky.'
+      },
+      {
+        term: 'Proč to sledovat jako Čech?',
+        text: 'Česká koruna je navázána na euro a česká ekonomika je úzce propojena s eurozónou. Vývoj ECB sazeb ovlivňuje kurz CZK/EUR, ceny nemovitostí v pohraničí, zájem zahraničních investorů i celkovou náladu na trhu. Kdo kupuje nemovitost jako investici, by měl sledovat obě centrální banky.'
+      }
+    ]
+  };
+
+  const CHARTS = { hypo: hypoData, inflace: inflaceData, eu: ecbData };
+  let inst = null;
+
+  // ── render ────────────────────────────────────────────────────
+  function render(key){
+    const d = CHARTS[key];
+    const ctx = document.getElementById('rtChart').getContext('2d');
+    if(inst) inst.destroy();
+
+    inst = new Chart(ctx,{
+      type:'line',
+      data:{
+        labels: d.labels,
+        datasets: d.datasets.map(s=>({
+          label: s.label,
+          data: s.data,
+          borderColor: s.color,
+          backgroundColor: s.fill || 'transparent',
+          borderWidth: s.color.includes('201,168,76') ? 2.5 : 1.6,
+          borderDash: s.dash || [],
+          pointRadius: 0,
+          pointHoverRadius: 6,
+          pointBackgroundColor: s.color,
+          tension: 0.35,
+          fill: s.fill !== false
+        }))
+      },
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        interaction:{mode:'index',intersect:false},
+        plugins:{
+          legend:{display:false},
+          tooltip:{
+            backgroundColor:'rgba(10,10,10,.97)',
+            borderColor:'rgba(201,168,76,.2)',borderWidth:1,
+            padding:14,
+            titleColor:'rgba(201,168,76,.7)',
+            titleFont:{family:'Montserrat',size:10},
+            titleMarginBottom:10,
+            bodyColor:'rgba(245,240,232,.75)',
+            bodyFont:{family:'Montserrat',size:12},
+            callbacks:{
+              label: c => '  '+c.dataset.label+':  '+c.parsed.y.toFixed(2)+' %',
+              title: i => '  '+i[0].label
+            }
+          }
+        },
+        scales:{
+          x:{
+            grid:{color:'rgba(201,168,76,.04)'},
+            ticks:{color:'rgba(245,240,232,.25)',font:{family:'Montserrat',size:10},maxRotation:0,maxTicksLimit:8},
+            border:{color:'rgba(201,168,76,.08)'}
+          },
+          y:{
+            grid:{color:'rgba(201,168,76,.05)'},
+            ticks:{color:'rgba(245,240,232,.25)',font:{family:'Montserrat',size:10},callback:v=>v+' %',maxTicksLimit:6},
+            border:{color:'rgba(201,168,76,.08)',dash:[4,4]}
+          }
+        }
+      }
+    });
+
+    // legenda
+    document.getElementById('rt-legend').innerHTML = d.datasets.map(s=>`
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:24px;height:2px;background:${s.color};flex-shrink:0;${s.dash?'border-top:2px dashed '+s.color+';background:none;height:0;':''}"></div>
+        <span style="font-size:12px;color:rgba(245,240,232,.5);letter-spacing:.5px;">${s.label}</span>
+      </div>`).join('');
+
+    // info boxy
+    document.getElementById('rt-info').innerHTML = d.info.map(b=>`
+      <div class="rt-info-box${b.hl?' highlight':''}">
+        <div class="rt-info-label">${b.label}</div>
+        <div class="rt-info-val">${b.val}</div>
+        <div class="rt-info-sub">${b.sub}</div>
+      </div>`).join('');
+
+    // vysvětlivky
+    const ex = EXPLAINS[key] || [];
+    document.getElementById('rt-explain').innerHTML = ex.length ? `
+      <div style="display:grid;grid-template-columns:repeat(${ex.length},1fr);gap:2px;">
+        ${ex.map(e=>`
+          <div style="background:var(--dark3);padding:32px 36px;border-left:2px solid rgba(201,168,76,.2);transition:border-color .3s;"
+               onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(201,168,76,.2)'">
+            <div style="font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;font-weight:500;">${e.term}</div>
+            <p style="font-size:14px;line-height:1.85;color:rgba(245,240,232,.65);font-weight:300;margin:0;">${e.text}</p>
+          </div>`).join('')}
+      </div>` : '';
+  }
+
+  window.rtShow = function(key, btn){
+    document.querySelectorAll('.rt-tab').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    render(key);
+  };
+
+  // init
+  if(document.readyState==='loading')
+    document.addEventListener('DOMContentLoaded',()=>render('hypo'));
+  else render('hypo');
+
+})();
+</script>
+
 <!-- CTA -->
 <section class="cta-section">
   <div class="cta-bg"></div>
