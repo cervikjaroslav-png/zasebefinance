@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Finance & Pojištění — Zasebe Finance</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -308,6 +309,34 @@
   }
   .step-title { font-size:14px;font-weight:500;color:var(--white);margin-bottom:10px;letter-spacing:.3px; }
   .step-desc { font-size:13px;line-height:1.75;color:rgba(245,240,232,.4);font-weight:300; }
+
+  /* DISCLAIMER */
+  .disclaimer {
+    padding: 60px;
+    background: var(--black);
+    border-top: 1px solid rgba(201,168,76,.08);
+  }
+  .disclaimer-inner {
+    max-width: 800px;
+    padding: 36px 40px;
+    border: 1px solid rgba(201,168,76,.1);
+    background: rgba(201,168,76,.02);
+  }
+  .disclaimer-label {
+    font-size:9px; letter-spacing:3px; text-transform:uppercase;
+    color:rgba(201,168,76,.4); margin-bottom:14px;
+  }
+  .disclaimer-text {
+    font-size:12px; line-height:1.8;
+    color:rgba(245,240,232,.3); font-weight:300;
+  }
+  .partner-note {
+    font-size:13px; line-height:1.8;
+    color:rgba(245,240,232,.35); font-weight:300;
+    margin-top:16px; padding-top:16px;
+    border-top:1px solid rgba(201,168,76,.1);
+  }
+  .partner-note strong { color:rgba(201,168,76,.6); font-weight:500; }
 
   /* CTA */
   .cta-section {
@@ -1163,6 +1192,17 @@
   }
 })();
 </script>
+
+<!-- DISCLAIMER -->
+<section class="disclaimer">
+  <div class="disclaimer-inner reveal">
+    <div class="disclaimer-label">Právní upozornění</div>
+    <div class="partner-note" style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+      <img src="LOGO INSIA WHITE.png" alt="INSIA" style="height:44px;width:auto;opacity:.7;flex-shrink:0;">
+      <div>Jsem vázaným zástupcem společnosti <strong>INSIA a.s.</strong> Za zprostředkování pojišťovacích služeb jsem odměňován výhradně touto společností v souladu s platnou smluvní úpravou — klientům za tuto činnost není účtován žádný přímý poplatek.</div>
+    </div>
+  </div>
+</section>
 
 <!-- CTA -->
 <section class="cta-section">

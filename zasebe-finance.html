@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zasebe Finance | Investice · Reality · Finance</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -747,26 +748,42 @@
   }
   .form-label {
     display: block;
-    font-size: 9px; letter-spacing: 2.5px;
+    font-size: 10px; letter-spacing: 2.5px;
     text-transform: uppercase;
-    color: rgba(245,240,232,0.35);
+    color: rgba(245,240,232,0.5);
     margin-bottom: 10px;
   }
   .form-input {
     width: 100%;
     background: transparent;
     border: none;
-    border-bottom: 1px solid rgba(201,168,76,0.2);
-    padding: 12px 0;
+    border-bottom: 1px solid rgba(201,168,76,0.25);
+    padding: 14px 0;
     color: var(--white);
     font-family: 'Montserrat', sans-serif;
-    font-size: 14px; font-weight: 300;
+    font-size: 15px; font-weight: 300;
     outline: none;
     transition: border-color 0.3s;
   }
   .form-input:focus { border-color: var(--gold); }
-  .form-input::placeholder { color: rgba(245,240,232,0.2); }
+  .form-input::placeholder { color: rgba(245,240,232,0.35); }
   textarea.form-input { resize: none; height: 100px; }
+
+  .captcha-group {
+    margin-top: 12px;
+    padding: 20px 24px;
+    background: rgba(201,168,76,0.04);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 4px;
+  }
+  .captcha-group .form-label {
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+  .captcha-group .form-input {
+    border-bottom-color: rgba(201,168,76,0.35);
+  }
 
   .form-submit {
     background: var(--gold);
@@ -1423,29 +1440,29 @@
       <div class="contact-details">
         <div class="contact-detail">
           <span class="contact-detail-label">Email</span>
-          <span class="contact-detail-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7811161e173802190b1d1a1d3e111619161b1d561b02">[email&#160;protected]</a></span>
-        </div>
-        <div class="contact-detail">
-          <span class="contact-detail-label">Telefon</span>
-          <span class="contact-detail-value">+420 xxx xxx xxx</span>
+          <span class="contact-detail-value"><a href="mailto:zasebe@zasebe.com" style="color:var(--white);text-decoration:none;border-bottom:1px solid rgba(201,168,76,.3);padding-bottom:2px;transition:border-color .3s;">zasebe@zasebe.com</a></span>
         </div>
       </div>
     </div>
-    <div class="contact-form">
+    <form class="contact-form" id="contactForm" onsubmit="sendForm(event)">
       <div class="form-group">
         <label class="form-label">Emailová adresa</label>
-        <input type="email" class="form-input" placeholder="vas@email.cz">
+        <input type="email" class="form-input" id="cfEmail" placeholder="vas@email.cz" required>
       </div>
       <div class="form-group">
         <label class="form-label">Telefon</label>
-        <input type="tel" class="form-input" placeholder="+420 xxx xxx xxx">
+        <input type="tel" class="form-input" id="cfPhone" placeholder="+420 xxx xxx xxx">
       </div>
       <div class="form-group">
         <label class="form-label">Zpráva</label>
-        <textarea class="form-input" placeholder="Čím Vám můžeme pomoci?"></textarea>
+        <textarea class="form-input" id="cfMsg" placeholder="Čím Vám můžeme pomoci?" required></textarea>
       </div>
-      <button class="form-submit"><span>Odeslat zprávu</span></button>
-    </div>
+      <div class="form-group captcha-group">
+        <label class="form-label" id="captchaLabel">Ověření: Kolik je 7 + 3?</label>
+        <input type="text" class="form-input" id="cfCaptcha" placeholder="Zadejte výsledek" required autocomplete="off" inputmode="numeric">
+      </div>
+      <button type="submit" class="form-submit"><span>Odeslat zprávu</span></button>
+    </form>
   </div>
 </section>
 
@@ -1519,13 +1536,33 @@
   const allReveals = document.querySelectorAll('.reveal');
   allReveals.forEach(el => el.classList.add('visible'));
 
-  // Form submit
-  const formBtn = document.querySelector('.form-submit');
-  if (formBtn) {
-    formBtn.addEventListener('click', () => {
-      alert('Děkujeme! Ozveme se Vám co nejdříve.');
-    });
+  // Anti-bot CAPTCHA
+  var captchaA = 0, captchaB = 0;
+  function newCaptcha(){
+    captchaA = Math.floor(Math.random()*9)+1;
+    captchaB = Math.floor(Math.random()*9)+1;
+    var label = document.getElementById('captchaLabel');
+    if(label) label.textContent = 'Ověření: Kolik je ' + captchaA + ' + ' + captchaB + '?';
   }
+  newCaptcha();
+
+  // Form submit → mailto
+  window.sendForm = function(e){
+    e.preventDefault();
+    var answer = parseInt(document.getElementById('cfCaptcha').value);
+    if(answer !== captchaA + captchaB){
+      alert('Špatná odpověď. Zkuste to prosím znovu.');
+      newCaptcha();
+      document.getElementById('cfCaptcha').value = '';
+      return;
+    }
+    var email = document.getElementById('cfEmail').value;
+    var phone = document.getElementById('cfPhone').value;
+    var msg = document.getElementById('cfMsg').value;
+    var subject = encodeURIComponent('Zpráva z webu Zasebe Finance');
+    var body = encodeURIComponent('Od: ' + email + (phone ? '\nTelefon: ' + phone : '') + '\n\n' + msg);
+    window.location.href = 'mailto:zasebe@zasebe.com?subject=' + subject + '&body=' + body;
+  };
 
   // Anchor scroll on load
   window.addEventListener('DOMContentLoaded', () => {
