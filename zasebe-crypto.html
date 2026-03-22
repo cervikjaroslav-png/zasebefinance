@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crypto — Zasebe Finance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-dark: #8B6914;
+    --black: #0A0A0A;
+    --dark: #111111;
+    --dark2: #161616;
+    --dark3: #1C1C1C;
+    --white: #F5F0E8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  html, body { background: #0A0A0A !important; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CURSOR */
+  .cursor { width:8px;height:8px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999; }
+  .cursor-ring { width:36px;height:36px;border:1px solid rgba(201,168,76,.5);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transition:transform .15s ease,width .3s,height .3s; }
+
+  /* NAV */
+  nav {
+    position: fixed; top:0; left:0; right:0;
+    z-index: 100;
+    padding: 28px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: background .4s, padding .4s;
+  }
+  nav.scrolled {
+    background: rgba(10,10,10,.95);
+    backdrop-filter: blur(12px);
+    padding: 18px 60px;
+    border-bottom: 1px solid rgba(201,168,76,.15);
+  }
+  .logo-wrap { display:flex;align-items:center;gap:14px;text-decoration:none; }
+  .logo-svg { width:52px;height:52px; }
+  .logo-text { display:flex;flex-direction:column;line-height:1; }
+  .logo-text span:first-child { font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--gold);letter-spacing:4px;text-transform:uppercase; }
+  .logo-text span:nth-child(2) { font-size:9px;font-weight:400;letter-spacing:4px;color:rgba(201,168,76,.6);text-transform:uppercase;margin-top:3px; }
+  .logo-powered { font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:9px;font-weight:400;font-style:italic;letter-spacing:1.5px;color:rgba(201,168,76,0.6);text-transform:none;margin-top:6px; }
+  .nav-links { display:flex;gap:40px;list-style:none; }
+  .nav-links a { color:rgba(245,240,232,.7);text-decoration:none;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-weight:400;transition:color .3s;position:relative; }
+  .nav-links a::after { content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s; }
+  .nav-links a:hover, .nav-links a.active { color:var(--gold); }
+  .nav-links a:hover::after, .nav-links a.active::after { width:100%; }
+  .nav-cta { background:transparent;border:1px solid var(--gold);color:var(--gold);padding:13px 28px;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-family:'Montserrat',sans-serif;font-weight:600;cursor:none;transition:all .3s; }
+  .nav-cta:hover { background:var(--gold);color:var(--black); }
+
+  /* PAGE HERO */
+  .page-hero {
+    min-height: 62vh;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 140px 60px 80px;
+    position: relative; overflow: hidden;
+  }
+  .page-hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 75% 35%, rgba(247,147,26,.08) 0%, transparent 55%),
+      radial-gradient(circle at 15% 75%, rgba(201,168,76,.04) 0%, transparent 40%);
+  }
+  .page-hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,.03) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse at 75% 50%, black 30%, transparent 75%);
+  }
+  .hero-bg-num {
+    position: absolute; right: 50px; bottom: -30px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 200px; font-weight: 300;
+    color: rgba(201,168,76,.04);
+    line-height: 1; user-select: none;
+    letter-spacing: -8px; z-index: 1;
+    animation: fadeIn 1s .3s ease both;
+  }
+  .page-hero-content { position:relative;z-index:2;max-width:720px; }
+  .page-hero-breadcrumb {
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:28px;
+    font-size:10px;letter-spacing:3px;text-transform:uppercase;
+    color:rgba(245,240,232,.3);
+    animation:fadeUp .7s ease both;
+  }
+  .page-hero-breadcrumb a { color:rgba(201,168,76,.5);text-decoration:none;transition:color .3s; }
+  .page-hero-breadcrumb a:hover { color:var(--gold); }
+  .page-hero-breadcrumb span { color:rgba(201,168,76,.3); }
+  .page-hero-tag { display:flex;align-items:center;gap:12px;margin-bottom:24px;animation:fadeUp .7s .05s ease both; }
+  .page-hero-tag::before { content:'';width:40px;height:1px;background:var(--gold); }
+  .page-hero-tag span { font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);font-weight:400; }
+  .page-hero-title {
+    font-family:'Cormorant Garamond',serif;
+    font-size: clamp(44px,5.5vw,80px);
+    font-weight:300;line-height:1.0;
+    color:var(--white);
+    animation:fadeUp .7s .1s ease both;
+    margin-bottom:10px;
+  }
+  .page-hero-title em { font-style:italic;color:var(--gold); }
+  .page-hero-subtitle {
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(18px,2.2vw,28px);
+    font-weight:300;font-style:italic;
+    color:rgba(245,240,232,.45);
+    animation:fadeUp .7s .15s ease both;
+    margin-bottom:28px;
+  }
+  .page-hero-desc {
+    font-size:14px;line-height:1.85;
+    color:rgba(245,240,232,.5);
+    max-width:580px;
+    animation:fadeUp .7s .2s ease both;
+    font-weight:300;
+  }
+  .page-hero-desc strong { color:var(--gold);font-weight:500; }
+
+  /* SECTION HELPERS */
+  .section-tag { display:inline-flex;align-items:center;gap:12px;margin-bottom:20px; }
+  .section-tag::before { content:'';width:30px;height:1px;background:var(--gold); }
+  .section-tag span { font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:400; }
+  .section-title { font-family:'Cormorant Garamond',serif;font-size:clamp(34px,3.5vw,52px);font-weight:300;line-height:1.1;color:var(--white); }
+  .section-title em { font-style:italic;color:var(--gold); }
+
+  /* CONTENT SECTIONS */
+  .cs {
+    padding: 110px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cs-dark { background: var(--dark2); border-top: 1px solid rgba(201,168,76,.1); }
+  .cs-black { background: var(--black); border-top: 1px solid rgba(201,168,76,.1); }
+
+  .cs-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .cs-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 120px; font-weight: 300;
+    color: rgba(201,168,76,.06);
+    line-height: 1;
+    position: absolute;
+    top: 40px; right: 60px;
+  }
+
+  .cs-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 3.5vw, 48px);
+    font-weight: 300; line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 24px;
+  }
+  .cs-title em { font-style: italic; color: var(--gold); }
+
+  .cs-text {
+    font-size: 15px; line-height: 2;
+    color: rgba(245,240,232,.6); font-weight: 300;
+    max-width: 560px;
+  }
+  .cs-text strong { color: var(--gold); font-weight: 500; }
+
+  .cs-list {
+    list-style: none;
+    margin-top: 28px;
+    display: flex; flex-direction: column; gap: 18px;
+  }
+  .cs-list li {
+    display: flex; align-items: flex-start; gap: 16px;
+    font-size: 15px; line-height: 1.8;
+    color: rgba(245,240,232,.6); font-weight: 300;
+  }
+  .cs-list li::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 10px;
+  }
+  .cs-list li strong { color: var(--gold); font-weight: 500; }
+
+  /* Blockchain SVG */
+  .bc-visual { display: flex; align-items: center; justify-content: center; }
+  .bc-visual svg { width: 100%; max-width: 480px; height: auto; }
+
+  /* Steps grid */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 60px;
+  }
+  .step-item {
+    padding: 40px 32px;
+    position: relative;
+    border-right: 1px solid rgba(201,168,76,.08);
+  }
+  .step-item:last-child { border-right: none; }
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px; font-weight: 300;
+    color: var(--gold); line-height: 1;
+    margin-bottom: 18px;
+  }
+  .step-title {
+    font-size: 14px; font-weight: 500;
+    color: var(--white); letter-spacing: .3px;
+    margin-bottom: 10px;
+  }
+  .step-desc {
+    font-size: 13px; line-height: 1.75;
+    color: rgba(245,240,232,.45); font-weight: 300;
+  }
+
+  /* Risk banner */
+  .risk-banner {
+    background: rgba(220,80,60,.04);
+    border: 1px solid rgba(220,80,60,.15);
+    border-left: 3px solid rgba(220,80,60,.4);
+    padding: 40px 48px;
+    margin-top: 60px;
+  }
+  .risk-banner h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 400;
+    color: var(--white); margin-bottom: 20px;
+  }
+  .risk-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 40px;
+  }
+  .risk-item {
+    font-size: 14px; line-height: 1.8;
+    color: rgba(245,240,232,.55); font-weight: 300;
+  }
+  .risk-item strong { color: #f87171; font-weight: 500; }
+
+  /* Glossary */
+  .glossary-wrap { margin-top: 60px; }
+  .glossary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 28px;
+  }
+  .glossary-card {
+    background: var(--dark3);
+    padding: 40px 36px;
+    transition: background .3s;
+  }
+  .glossary-card:hover { background: rgba(201,168,76,.04); }
+  .glossary-term {
+    font-size: 17px; font-weight: 600;
+    color: var(--gold); letter-spacing: .5px;
+    margin-bottom: 12px;
+  }
+  .glossary-def {
+    font-size: 15px; line-height: 1.85;
+    color: rgba(245,240,232,.55); font-weight: 300;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 1200px) {
+    .cs { padding: 70px 24px !important; }
+    .cs-split { grid-template-columns: 1fr !important; gap: 40px !important; }
+    .cs-num { font-size: 70px !important; top: 20px !important; right: 24px !important; }
+    .steps-grid { grid-template-columns: 1fr 1fr !important; }
+    .step-item { border-right: none !important; border-bottom: 1px solid rgba(201,168,76,.08); }
+    .risk-grid { grid-template-columns: 1fr !important; }
+    .risk-banner { padding: 28px 24px !important; }
+    .glossary-grid { grid-template-columns: 1fr 1fr !important; }
+    .bc-visual svg { max-width: 320px !important; }
+  }
+  @media (max-width: 480px) {
+    .steps-grid { grid-template-columns: 1fr !important; }
+    .glossary-grid { grid-template-columns: 1fr !important; }
+    .cs-title { font-size: 28px !important; }
+  }
+
+  /* LIVE MARKET */
+  @keyframes mkt-pulse {
+    0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(74,222,128,.5)}
+    50%{opacity:.6;box-shadow:0 0 0 6px rgba(74,222,128,0)}
+  }
+  .mkt-table{border:1px solid rgba(201,168,76,.12);position:relative;}
+  .mkt-table::before{content:'';position:absolute;top:0;left:0;width:32px;height:32px;border-top:2px solid var(--gold);border-left:2px solid var(--gold);pointer-events:none;z-index:2;}
+  .mkt-table::after{content:'';position:absolute;bottom:0;right:0;width:32px;height:32px;border-bottom:2px solid var(--gold);border-right:2px solid var(--gold);pointer-events:none;z-index:2;}
+  .mkt-head{padding:12px 24px;border-bottom:1px solid rgba(201,168,76,.1);font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(245,240,232,.25);}
+  .mkt-row{padding:13px 24px;border-bottom:1px solid rgba(201,168,76,.05);align-items:center;transition:background .2s;}
+  .mkt-row:last-child{border-bottom:none;}
+  .mkt-row:hover{background:rgba(201,168,76,.03);}
+  .mkt-grid-crypto{display:grid;grid-template-columns:1fr 130px 88px 88px 88px 88px 88px;gap:8px;align-items:center;}
+  .mkt-coin-info{display:flex;align-items:center;gap:10px;min-width:0;}
+  .mkt-coin-logo{width:28px;height:28px;border-radius:50%;flex-shrink:0;background:rgba(245,240,232,.05);}
+  .mkt-coin-text{min-width:0;}
+  .mkt-name{font-size:14px;font-weight:500;color:rgba(245,240,232,.9);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .mkt-sym{font-size:10px;color:rgba(245,240,232,.3);letter-spacing:1.5px;margin-top:2px;}
+  .mkt-price{font-size:14px;color:rgba(245,240,232,.85);text-align:right;font-weight:400;}
+  .mkt-chg{font-size:13px;text-align:right;font-weight:600;}
+  .mkt-chg.up{color:#4ade80;} .mkt-chg.down{color:#f87171;}
+  .mkt-chg.neutral{color:rgba(245,240,232,.3);}
+  .mkt-loading{padding:36px;text-align:center;color:rgba(245,240,232,.3);font-size:13px;letter-spacing:1px;}
+  .tar{text-align:right;}
+
+  @media(max-width:1100px){
+    .hide-lg{display:none!important;}
+    .mkt-grid-crypto{grid-template-columns:1fr 120px 80px 80px 80px!important;}
+  }
+  @media(max-width:900px){
+    .hide-md{display:none!important;}
+    .mkt-grid-crypto{grid-template-columns:1fr 105px 72px!important;gap:6px!important;}
+    .mkt-head{padding:10px 14px!important;font-size:8px!important;letter-spacing:1.5px!important;}
+    .mkt-row{padding:11px 14px!important;}
+    .mkt-name{font-size:12px!important;}
+    .mkt-sym{font-size:9px!important;}
+    .mkt-price{font-size:12px!important;}
+    .mkt-chg{font-size:11px!important;}
+    .mkt-coin-logo{width:22px!important;height:22px!important;}
+    .mkt-coin-info{gap:7px!important;}
+  }
+  @media(max-width:480px){
+    .mkt-grid-crypto{grid-template-columns:1fr 82px 58px!important;gap:4px!important;}
+    .mkt-head{padding:8px 10px!important;font-size:7px!important;}
+    .mkt-row{padding:9px 10px!important;}
+    .mkt-name{font-size:11px!important;}
+    .mkt-price{font-size:11px!important;}
+    .mkt-chg{font-size:10px!important;}
+    .mkt-coin-logo{width:18px!important;height:18px!important;}
+    .mkt-coin-info{gap:5px!important;}
+  }
+
+  /* CTA */
+  .cta-section {
+    padding:100px 60px;
+    background:var(--black);
+    border-top:1px solid rgba(201,168,76,.1);
+    text-align:center;
+    position:relative;overflow:hidden;
+  }
+  .cta-bg {
+    position:absolute;inset:0;
+    background:radial-gradient(ellipse at 50% 100%,rgba(201,168,76,.06) 0%,transparent 60%);
+    pointer-events:none;
+  }
+  .cta-title {
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(36px,4vw,58px);font-weight:300;
+    line-height:1.1;color:var(--white);
+    margin-bottom:20px;position:relative;z-index:1;
+  }
+  .cta-title em { font-style:italic;color:var(--gold); }
+  .cta-desc {
+    font-size:15px;line-height:1.8;
+    color:rgba(245,240,232,.5);font-weight:300;
+    max-width:500px;margin:0 auto 40px;
+    position:relative;z-index:1;
+  }
+  .btn-primary {
+    background:var(--gold);color:var(--black);
+    padding:16px 40px;font-size:10px;
+    letter-spacing:2.5px;text-transform:uppercase;
+    text-decoration:none;font-family:'Montserrat',sans-serif;
+    font-weight:600;display:inline-flex;
+    align-items:center;gap:10px;
+    transition:all .3s;position:relative;overflow:hidden;cursor:none;
+  }
+  .btn-primary::before { content:'';position:absolute;inset:0;background:var(--white);transform:translateX(-100%);transition:transform .3s; }
+  .btn-primary:hover::before { transform:translateX(0); }
+  .btn-primary span { position:relative;z-index:1; }
+  .btn-primary .arrow { width:16px;height:16px;border:1.5px solid var(--black);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;position:relative;z-index:1; }
+
+  /* FOOTER */
+  footer { background:var(--black);padding:60px;border-top:1px solid rgba(201,168,76,.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px; }
+  .footer-copy { font-size:12px;color:rgba(245,240,232,.25);letter-spacing:.5px; }
+  .footer-links { display:flex;gap:30px; }
+  .footer-links a { font-size:11px;color:rgba(245,240,232,.25);text-decoration:none;letter-spacing:1px;transition:color .3s; }
+  .footer-links a:hover { color:var(--gold); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeIn  { from{opacity:0} to{opacity:1} }
+
+  .reveal { opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease; }
+  .reveal.visible { opacity:1;transform:translateY(0); }
+  .reveal-delay-1 { transition-delay:.1s; }
+  .reveal-delay-2 { transition-delay:.2s; }
+  .reveal-delay-3 { transition-delay:.3s; }
+  .reveal-delay-4 { transition-delay:.4s; }
+
+/* ═══════════════════════════════
+   MOBILNÍ RESPONZIVNÍ DESIGN
+═══════════════════════════════ */
+@media (max-width: 1200px) {
+
+  /* NAV */
+  nav { padding: 16px 24px !important; }
+  nav.scrolled { padding: 12px 24px !important; }
+  .nav-links { display: none !important; }
+  .nav-cta { display: none !important; }
+  .logo-text span:first-child { font-size: 18px !important; letter-spacing: 2px !important; }
+  .logo-text span:nth-child(2) { font-size: 10px !important; letter-spacing: 2px !important; }
+  .logo-powered { font-size: 9px !important; letter-spacing: 1px !important; }
+
+  /* PAGE HERO */
+  .page-hero { padding: 100px 24px 50px !important; min-height: auto !important; }
+  .page-hero-title { font-size: clamp(40px, 10vw, 60px) !important; }
+  .hero-bg-num { font-size: 80px !important; right: 10px !important; }
+
+  /* LIVE MARKETS */
+  #live-markets { padding: 60px 24px !important; }
+  #live-markets>div:first-child { grid-template-columns: 1fr !important; gap: 24px !important; }
+
+  /* CTA */
+  .cta-section { padding: 60px 24px !important; }
+  .cta-title { font-size: clamp(28px, 8vw, 40px) !important; }
+  .btn-primary { padding: 16px 32px !important; font-size: 11px !important; }
+
+  /* SECTION TITLES */
+  .section-title { font-size: clamp(28px, 8vw, 40px) !important; }
+  .section-tag span { font-size: 10px !important; letter-spacing: 2.5px !important; }
+
+  /* FOOTER */
+  footer { padding: 40px 24px !important; flex-direction: column !important; gap: 16px !important; text-align: center !important; }
+  .footer-links { flex-wrap: wrap !important; justify-content: center !important; gap: 16px !important; }
+  .footer-copy { font-size: 12px !important; }
+  .footer-links a { font-size: 12px !important; }
+
+  /* SOCIAL SIDEBAR */
+  .social-sidebar { display: none !important; }
+
+  /* NO SOCIAL */
+  section[style*="padding:60px 60px"] { padding: 40px 24px !important; }
+
+  /* BREADCRUMB */
+  .page-hero-breadcrumb { font-size: 9px !important; }
+
+  /* CURSOR — hide on mobile */
+  .cursor, .cursor-ring { display: none !important; }
+  body { cursor: auto !important; }
+}
+
+@media (max-width: 480px) {
+  .page-hero-title { font-size: 34px !important; }
+  nav .nav-cta { display: none !important; }
+}
+
+
+/* HAMBURGER MENU */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 200;
+}
+.hamburger span {
+  width: 24px; height: 2px;
+  background: var(--gold);
+  transition: all 0.3s;
+  display: block;
+}
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(8,8,8,0.98);
+  z-index: 150;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px; font-weight: 300;
+  color: rgba(245,240,232,0.7);
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: color 0.3s;
+}
+.mobile-menu a:hover { color: var(--gold); }
+.mobile-menu .menu-line {
+  width: 40px; height: 1px;
+  background: rgba(201,168,76,0.2);
+}
+
+@media (max-width: 1200px) {
+  .hamburger { display: flex !important; }
+}
+
+
+  /* NAV FREEZE FIX */
+  nav {
+    background: rgba(10,10,10,0.97) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+  }
+
+  @media (max-width: 1200px) {
+    html, body, * { cursor: auto !important; }
+    .cursor, .cursor-ring { display: none !important; }
+  }
+
+</style>
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="zasebe-investice.html" onclick="closeMobileMenu(); window.location='zasebe-investice.html'; return false;">Investice</a>
+  <div class="menu-line"></div>
+  <a href="zasebe-crypto.html" onclick="closeMobileMenu(); window.location='zasebe-crypto.html'; return false;">Crypto</a>
+  <div class="menu-line"></div>
+  <a href="zasebe-reality.html" onclick="closeMobileMenu(); window.location='zasebe-reality.html'; return false;">Reality</a>
+  <div class="menu-line"></div>
+  <a href="zasebe-finance-pojisteni.html" onclick="closeMobileMenu(); window.location='zasebe-finance-pojisteni.html'; return false;">Pojištění</a>
+  <div class="menu-line"></div>
+  <a href="zasebe-finance.html#kontakt" onclick="closeMobileMenu(); window.location='zasebe-finance.html#kontakt'; return false;">Kontakt</a>
+  <div class="menu-line"></div>
+  <a href="zasebe-finance.html#o-nas" onclick="closeMobileMenu(); window.location='zasebe-finance.html#o-nas'; return false;">O nás</a>
+</div>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="zasebe-finance.html" class="logo-wrap">
+    <img src="ZASEBE FINANCE LOGO.png" alt="Zasebe Finance logo" style="height:40px;width:auto;">
+    <div class="logo-text">
+      <span>Zasebe Finance</span>
+      <span>Investice · Reality · Finance</span>
+      <span class="logo-powered">Powered by Estorealis s.r.o.</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="zasebe-investice.html">Investice</a></li>
+    <li><a href="zasebe-crypto.html" class="active">Crypto</a></li>
+    <li><a href="zasebe-reality.html">Reality</a></li>
+    <li><a href="zasebe-finance-pojisteni.html">Pojištění</a></li>
+    <li><a href="zasebe-finance.html#kontakt">Kontakt</a></li>
+    <li><a href="zasebe-finance.html#o-nas">O nás</a></li>
+  </ul>
+  <button class="nav-cta" onclick="window.location='zasebe-finance.html#kontakt'">Domluvit schůzku</button>
+<div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-grid"></div>
+  <div class="hero-bg-num">BTC</div>
+
+  <div class="page-hero-content">
+    <div class="page-hero-breadcrumb">
+      <a href="zasebe-finance.html">Zasebe Finance</a>
+      <span>/</span>
+      <span style="color:rgba(245,240,232,.5)">Crypto</span>
+    </div>
+    <div class="page-hero-tag"><span>Kryptoměny</span></div>
+    <h1 class="page-hero-title">Svět <em>crypto</em></h1>
+    <p class="page-hero-subtitle">— jednoduše</p>
+    <p class="page-hero-desc">
+      Kryptoměny mění způsob, jakým lidé přemýšlí o penězích. Tady najdete vše, co potřebujete vědět jako <strong>úplný začátečník</strong> — od prvního nákupu až po bezpečné uchovávání.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ 01 · CO JE KRYPTOMĚNA ═══ -->
+<section class="cs cs-dark">
+  <span class="cs-num reveal">01</span>
+  <div class="cs-split reveal">
+    <div>
+      <div class="section-tag"><span>Základy</span></div>
+      <h2 class="cs-title">Co je <em>kryptoměna</em></h2>
+      <p class="cs-text">
+        Digitální peníze, které existují pouze na internetu. Nevydává je žádná banka ani stát — fungují díky technologii zvané <strong>blockchain</strong>.
+      </p>
+    </div>
+    <div>
+      <p class="cs-text">
+        Nejznámější je <strong>Bitcoin</strong> — první kryptoměna z roku 2009. Druhou největší je <strong>Ethereum</strong>, které umožňuje stavět aplikace přímo na blockchainu.
+      </p>
+      <ul class="cs-list" style="margin-top:20px;">
+        <li><strong>Posílání peněz</strong> — kamkoli na světě, během minut, za zlomek poplatků</li>
+        <li><strong>Mikropayments</strong> — platby v haléřích, které přes banku nedávají smysl</li>
+        <li><strong>DeFi</strong> — půjčky, spoření a směna peněz bez prostředníka</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 02 · BLOCKCHAIN ═══ -->
+<section class="cs cs-black">
+  <span class="cs-num reveal">02</span>
+  <div class="cs-split reveal">
+    <div>
+      <div class="section-tag"><span>Technologie</span></div>
+      <h2 class="cs-title">Co je <em>blockchain</em></h2>
+      <p class="cs-text">
+        Představte si <strong>veřejný zápisník</strong>, do kterého se zapisuje každá transakce. Nikdo ho nemůže přepsat, vymazat ani podvést — jeho kopii drží tisíce počítačů po celém světě.
+      </p>
+      <p class="cs-text" style="margin-top:16px;">
+        Jakmile se záznam zapíše, zůstane navždy. Žádná banka, žádný úředník — jen <strong>matematika a transparentnost</strong>.
+      </p>
+    </div>
+    <div class="bc-visual">
+      <svg viewBox="0 0 440 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Glow -->
+        <circle cx="220" cy="150" r="120" fill="rgba(201,168,76,0.03)"/>
+
+        <!-- Connection lines -->
+        <line x1="130" y1="100" x2="220" y2="100" stroke="rgba(201,168,76,0.35)" stroke-width="2"/>
+        <line x1="220" y1="100" x2="310" y2="100" stroke="rgba(201,168,76,0.35)" stroke-width="2"/>
+
+        <!-- Arrows -->
+        <polygon points="175,100 168,95 168,105" fill="rgba(201,168,76,0.6)"/>
+        <polygon points="265,100 258,95 258,105" fill="rgba(201,168,76,0.6)"/>
+
+        <!-- Block 1 -->
+        <rect x="55" y="60" width="110" height="80" rx="8" stroke="rgba(201,168,76,0.5)" stroke-width="1.5" fill="rgba(201,168,76,0.05)"/>
+        <text x="110" y="88" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="16" fill="rgba(201,168,76,0.85)" font-weight="400">Blok 1</text>
+        <line x1="75" y1="100" x2="145" y2="100" stroke="rgba(201,168,76,0.15)" stroke-width="1"/>
+        <text x="110" y="118" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="9" fill="rgba(245,240,232,0.25)" letter-spacing="1.5">#a3f8c2...</text>
+        <text x="110" y="132" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="8" fill="rgba(245,240,232,0.2)">3 transakce</text>
+
+        <!-- Block 2 -->
+        <rect x="165" y="60" width="110" height="80" rx="8" stroke="rgba(201,168,76,0.8)" stroke-width="2" fill="rgba(201,168,76,0.08)"/>
+        <text x="220" y="88" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="16" fill="rgba(201,168,76,1)" font-weight="400">Blok 2</text>
+        <line x1="185" y1="100" x2="255" y2="100" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
+        <text x="220" y="118" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="9" fill="rgba(245,240,232,0.3)" letter-spacing="1.5">#7b2ce1...</text>
+        <text x="220" y="132" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="8" fill="rgba(245,240,232,0.2)">5 transakcí</text>
+
+        <!-- Block 3 -->
+        <rect x="275" y="60" width="110" height="80" rx="8" stroke="rgba(201,168,76,0.5)" stroke-width="1.5" fill="rgba(201,168,76,0.05)"/>
+        <text x="330" y="88" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="16" fill="rgba(201,168,76,0.85)" font-weight="400">Blok 3</text>
+        <line x1="295" y1="100" x2="365" y2="100" stroke="rgba(201,168,76,0.15)" stroke-width="1"/>
+        <text x="330" y="118" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="9" fill="rgba(245,240,232,0.25)" letter-spacing="1.5">#e91df0...</text>
+        <text x="330" y="132" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="8" fill="rgba(245,240,232,0.2)">2 transakce</text>
+
+        <!-- Network lines -->
+        <line x1="110" y1="145" x2="130" y2="220" stroke="rgba(201,168,76,0.12)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="110" y1="145" x2="220" y2="220" stroke="rgba(201,168,76,0.12)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="220" y1="145" x2="130" y2="220" stroke="rgba(201,168,76,0.12)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="220" y1="145" x2="310" y2="220" stroke="rgba(201,168,76,0.12)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="330" y1="145" x2="220" y2="220" stroke="rgba(201,168,76,0.12)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="330" y1="145" x2="310" y2="220" stroke="rgba(201,168,76,0.12)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="130" y1="220" x2="220" y2="220" stroke="rgba(201,168,76,0.12)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="220" y1="220" x2="310" y2="220" stroke="rgba(201,168,76,0.12)" stroke-width="1" stroke-dasharray="4 4"/>
+
+        <!-- Nodes -->
+        <circle cx="130" cy="225" r="22" stroke="rgba(245,240,232,0.15)" stroke-width="1" fill="rgba(201,168,76,0.03)"/>
+        <text x="130" y="222" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="14" fill="rgba(245,240,232,0.3)">🖥</text>
+        <text x="130" y="240" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="7" fill="rgba(245,240,232,0.25)" letter-spacing="1">NODE</text>
+
+        <circle cx="220" cy="225" r="22" stroke="rgba(245,240,232,0.15)" stroke-width="1" fill="rgba(201,168,76,0.03)"/>
+        <text x="220" y="222" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="14" fill="rgba(245,240,232,0.3)">🖥</text>
+        <text x="220" y="240" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="7" fill="rgba(245,240,232,0.25)" letter-spacing="1">NODE</text>
+
+        <circle cx="310" cy="225" r="22" stroke="rgba(245,240,232,0.15)" stroke-width="1" fill="rgba(201,168,76,0.03)"/>
+        <text x="310" y="222" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="14" fill="rgba(245,240,232,0.3)">🖥</text>
+        <text x="310" y="240" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="7" fill="rgba(245,240,232,0.25)" letter-spacing="1">NODE</text>
+
+        <!-- Label -->
+        <text x="220" y="295" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="9" fill="rgba(201,168,76,0.4)" letter-spacing="4">DECENTRALIZOVANÁ SÍŤ</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 03 · VÝHODY ═══ -->
+<section class="cs cs-dark">
+  <span class="cs-num reveal">03</span>
+  <div class="cs-split reveal">
+    <div>
+      <div class="section-tag"><span>Proč krypto</span></div>
+      <h2 class="cs-title">Výhody oproti <em>bankám</em></h2>
+      <p class="cs-text">Za kryptoměnami stojí myšlenka <strong>finanční svobody</strong> — peníze bez prostředníků, dostupné komukoli s internetem.</p>
+    </div>
+    <div>
+      <ul class="cs-list">
+        <li><strong>Rychlost</strong> — transakce za sekundy, ne za dny</li>
+        <li><strong>Nižší poplatky</strong> — zejména u zahraničních plateb</li>
+        <li><strong>Dostupnost 24/7</strong> — funguje i o víkendu a svátcích</li>
+        <li><strong>Žádný prostředník</strong> — vaše peníze, vaše pravidla</li>
+        <li><strong>Přístup pro všechny</strong> — stačí telefon a internet</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 04 · JAK ZAČÍT + RIZIKA ═══ -->
+<section class="cs cs-black">
+  <span class="cs-num reveal">04</span>
+  <div class="reveal">
+    <div class="section-tag"><span>Začínáme</span></div>
+    <h2 class="cs-title">Pomůžeme Vám <em>začít</em></h2>
+    <p class="cs-text">Nemusíte v tom být sami. Provedeme Vás každým krokem — od výběru platformy po bezpečné uchovávání.</p>
+  </div>
+
+  <div class="steps-grid reveal">
+    <div class="step-item">
+      <div class="step-num">01</div>
+      <div class="step-title">Výběr platformy</div>
+      <div class="step-desc">Vybereme pro Vás ověřenou a regulovanou burzu, která nejlépe odpovídá Vašim potřebám.</div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">02</div>
+      <div class="step-title">Registrace a ověření</div>
+      <div class="step-desc">Provedeme Vás celým procesem registrace a ověření identity. Je to rychlé a bezpečné.</div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">03</div>
+      <div class="step-title">První nákup</div>
+      <div class="step-desc">Stačí začít s malou částkou. Doporučíme Vám, kam investovat na začátek.</div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">04</div>
+      <div class="step-title">Bezpečné uchovávání</div>
+      <div class="step-desc">Ukážeme Vám, jak chránit krypto pomocí hardware walletu a správně zálohovat přístup.</div>
+    </div>
+  </div>
+
+  <!-- Rizika -->
+  <div class="risk-banner reveal">
+    <h3>Na co si dát pozor</h3>
+    <div class="risk-grid">
+      <div class="risk-item"><strong>Volatilita</strong> — cena může za den klesnout i o 20 %. Investujte jen peníze, o které si můžete dovolit přijít.</div>
+      <div class="risk-item"><strong>Podvody</strong> — falešné projekty a phishing. Kdo slibuje zaručený zisk, je téměř jistě podvodník.</div>
+      <div class="risk-item"><strong>Ztráta přístupu</strong> — ztratíte-li seed phrase, peníze jsou nenávratně pryč. Žádná zákaznická linka.</div>
+      <div class="risk-item"><strong>Regulace</strong> — zákony se mění. Vzniká nejistota kolem zdanění a pravidel.</div>
+    </div>
+  </div>
+
+  <!-- Glossary -->
+  <div class="glossary-wrap reveal">
+    <div class="section-tag"><span>Slovníček</span></div>
+    <h3 class="cs-title" style="font-size:clamp(24px,2.5vw,36px);">Pojmy, které <em>potkáte</em></h3>
+    <div class="glossary-grid">
+      <div class="glossary-card">
+        <div class="glossary-term">Wallet</div>
+        <div class="glossary-def">Digitální peněženka — aplikace nebo zařízení pro uchovávání krypta.</div>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">Seed phrase</div>
+        <div class="glossary-def">12–24 slov, která slouží jako záloha peněženky. Kdo je má, má vaše peníze.</div>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">Private key</div>
+        <div class="glossary-def">Tajný klíč dokazující vlastnictví krypta. Nikdy ho nikomu neukazujte.</div>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">Gas fee</div>
+        <div class="glossary-def">Poplatek za zpracování transakce. Výše závisí na vytížení sítě.</div>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">HODL</div>
+        <div class="glossary-def">Strategie dlouhodobého držení krypta bez ohledu na výkyvy ceny.</div>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">Altcoin</div>
+        <div class="glossary-def">Jakákoli kryptoměna kromě Bitcoinu — Ethereum, Solana, Cardano aj.</div>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">Burza</div>
+        <div class="glossary-def">Platforma pro nákup a prodej krypta. Pomůžeme Vám vybrat tu správnou.</div>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">DeFi</div>
+        <div class="glossary-def">Decentralizované finance — půjčky, spoření a směna bez bank.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE CRYPTO PRICES -->
+<section id="live-markets" style="padding:100px 60px;background:var(--black);border-top:1px solid rgba(201,168,76,.1);">
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-bottom:50px;" class="reveal">
+    <div>
+      <div class="section-tag"><span>Živé trhy</span></div>
+      <h2 class="section-title"><em>Kryptoměny</em><br>právě teď</h2>
+    </div>
+    <div>
+      <p style="font-size:15px;line-height:1.9;color:rgba(245,240,232,.6);font-weight:300;">
+        Živé ceny top 20 kryptoměn podle tržní kapitalizace. Data se automaticky obnovují každých <strong style="color:var(--gold);font-weight:500;">30 sekund</strong>.
+      </p>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:16px;flex-wrap:wrap;">
+        <div id="mkt-dot" style="width:8px;height:8px;background:#4ade80;border-radius:50%;flex-shrink:0;animation:mkt-pulse 2s infinite;"></div>
+        <span id="mkt-status" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.35);">Načítám...</span>
+        <span id="mkt-time" style="font-size:10px;color:rgba(245,240,232,.2);margin-left:auto;"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="mkt-table" style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+      <div class="mkt-head mkt-grid-crypto">
+        <span>Název</span>
+        <span class="tar">Cena</span>
+        <span class="tar">24 h</span>
+        <span class="tar hide-md">7 dní</span>
+        <span class="tar hide-md">Měsíc</span>
+        <span class="tar hide-lg">YTD</span>
+        <span class="tar hide-lg">1 rok</span>
+      </div>
+      <div id="crypto-body"><div class="mkt-loading">Načítám kurzy…</div></div>
+    </div>
+  </div>
+
+</section>
+
+<script>
+(function(){
+  function fp(n){
+    if(n===null||n===undefined)return'—';
+    if(n>=1000)return'$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+    if(n>=1)return'$'+n.toFixed(4);
+    return'$'+n.toFixed(6);
+  }
+  function cs(v){if(v===null||v===undefined)return'neutral';return v>=0?'up':'down';}
+  function pct(v){if(v===null||v===undefined)return'—';return(v>=0?'+':'')+v.toFixed(2)+' %';}
+  function chgHtml(v,extraCls){
+    const c=cs(v);
+    return `<span class="mkt-chg ${c} ${extraCls||''}">${pct(v)}</span>`;
+  }
+
+  function cacheSet(key,data){try{sessionStorage.setItem(key,JSON.stringify({t:Date.now(),d:data}));}catch(e){}}
+  function cacheGet(key,maxAge){
+    try{
+      const raw=sessionStorage.getItem(key);
+      if(!raw)return null;
+      const obj=JSON.parse(raw);
+      if(Date.now()-obj.t>maxAge)return null;
+      return obj.d;
+    }catch(e){return null;}
+  }
+
+  async function fetchViaProxy(url, timeout){
+    timeout = timeout || 10000;
+    const strategies = [
+      {url: url, parse: r => r.json()},
+      {url: `https://corsproxy.io/?${encodeURIComponent(url)}`, parse: r => r.json()},
+      {url: `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`, parse: async r => {const j=await r.json(); return JSON.parse(j.contents);}},
+      {url: `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`, parse: r => r.json()},
+    ];
+    for(const s of strategies){
+      try{
+        const r = await fetch(s.url, {signal:AbortSignal.timeout(timeout)});
+        if(!r.ok) continue;
+        return await s.parse(r);
+      }catch(e){continue;}
+    }
+    return null;
+  }
+
+  // Top 20 coins by market cap
+  const COINS = [
+    'bitcoin','ethereum','tether','binancecoin','solana',
+    'ripple','usd-coin','dogecoin','cardano','tron',
+    'avalanche-2','chainlink','shiba-inu','polkadot','bitcoin-cash',
+    'uniswap','litecoin','near','stellar','internet-computer'
+  ];
+
+  function daysYTD(){
+    const now=new Date();
+    const jan1=new Date(now.getFullYear(),0,1);
+    return Math.floor((now-jan1)/(86400000));
+  }
+
+  let cryptoLoading = false;
+  async function loadCrypto(){
+    if(cryptoLoading)return;
+    cryptoLoading=true;
+    try{
+      const ids = COINS.join(',');
+      const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${ids}&order=market_cap_desc&per_page=20&sparkline=false&price_change_percentage=24h,7d,30d,1y`;
+      const data = await fetchViaProxy(url, 12000);
+
+      if(Array.isArray(data) && data.length){
+        await enrichCryptoYTD(data);
+        renderCrypto(data);
+        cacheSet('mkt_crypto_page',data);
+        setStatus('Aktualizováno');
+      } else {
+        const cached=cacheGet('mkt_crypto_page',600000);
+        if(cached){renderCrypto(cached);setStatus('Uložená data','#facc15');}
+        else{document.getElementById('crypto-body').innerHTML='<div class="mkt-loading">Data dočasně nedostupná — zkuste obnovit stránku.</div>';setStatus('Chyba připojení','#f87171');}
+      }
+    }catch(e){
+      const cached=cacheGet('mkt_crypto_page',600000);
+      if(cached){renderCrypto(cached);setStatus('Uložená data','#facc15');}
+      else{document.getElementById('crypto-body').innerHTML='<div class="mkt-loading">Data dočasně nedostupná.</div>';setStatus('Chyba připojení','#f87171');}
+    }
+    cryptoLoading=false;
+  }
+
+  async function enrichCryptoYTD(data){
+    const days = daysYTD();
+    if(days<2)return;
+    const promises = data.map(async c=>{
+      try{
+        const url=`https://api.coingecko.com/api/v3/coins/${c.id}/market_chart?vs_currency=usd&days=${days}&interval=daily`;
+        const chart = await fetchViaProxy(url, 8000);
+        if(chart && chart.prices && chart.prices.length>1){
+          const jan1Price = chart.prices[0][1];
+          c.ytd_change = (c.current_price - jan1Price) / jan1Price * 100;
+        }
+      }catch(e){}
+    });
+    await Promise.allSettled(promises);
+  }
+
+  function renderCrypto(data){
+    const el = document.getElementById('crypto-body');
+    if(!data||!data.length){el.innerHTML='<div class="mkt-loading">Žádná data.</div>';return;}
+    el.innerHTML = data.map((c,i)=>{
+      const logo = c.image || '';
+      return `
+      <div class="mkt-row mkt-grid-crypto">
+        <div class="mkt-coin-info">
+          ${logo ? `<img class="mkt-coin-logo" src="${logo}" alt="${c.symbol}" loading="lazy" onerror="this.style.display='none'">` : '<div class="mkt-coin-logo"></div>'}
+          <div class="mkt-coin-text">
+            <div class="mkt-name">${c.name}</div>
+            <div class="mkt-sym">${c.symbol.toUpperCase()}</div>
+          </div>
+        </div>
+        <span class="mkt-price">${fp(c.current_price)}</span>
+        ${chgHtml(c.price_change_percentage_24h)}
+        ${chgHtml(c.price_change_percentage_7d_in_currency,'hide-md')}
+        ${chgHtml(c.price_change_percentage_30d_in_currency,'hide-md')}
+        ${chgHtml(c.ytd_change,'hide-lg')}
+        ${chgHtml(c.price_change_percentage_1y_in_currency,'hide-lg')}
+      </div>`;
+    }).join('');
+  }
+
+  function setStatus(msg, color){
+    document.getElementById('mkt-status').textContent = msg;
+    document.getElementById('mkt-dot').style.background = color||'#4ade80';
+    const now = new Date();
+    document.getElementById('mkt-time').textContent =
+      'Obnoveno: '+now.getHours()+':'+String(now.getMinutes()).padStart(2,'0')+':'+String(now.getSeconds()).padStart(2,'0');
+  }
+
+  loadCrypto();
+  setInterval(()=>{ loadCrypto(); }, 30000);
+})();
+</script>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg"></div>
+  <h2 class="cta-title reveal">Chcete začít<br><em>investovat do krypta?</em></h2>
+  <p class="cta-desc reveal reveal-delay-1">Rádi Vám poradíme s prvními kroky. Domluvte si nezávaznou schůzku a probereme, co dává smysl právě pro Vás.</p>
+  <a href="zasebe-finance.html#kontakt" class="btn-primary reveal reveal-delay-2">
+    <span>Domluvit schůzku</span>
+    <span class="arrow"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+  </a>
+</section>
+
+<!-- NO SOCIAL -->
+<section style="padding:50px 40px;background:#0A0A0A;border-top:1px solid rgba(201,168,76,.08);text-align:center;">
+  <div style="display:flex;align-items:center;justify-content:center;gap:36px;flex-wrap:wrap;margin-bottom:28px;">
+    <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.6;"><circle cx="22" cy="22" r="20" stroke="rgba(245,240,232,0.45)" stroke-width="1.4"/><path d="M24.5 14h2.5v-3.5h-2.8c-3.1 0-4.7 1.9-4.7 4.8v2.2H17v3.5h2.5V30h3.5v-9h2.8l.5-3.5h-3.3v-1.8c0-1 .3-1.7 1.5-1.7z" fill="rgba(245,240,232,0.45)"/><line x1="8" y1="36" x2="36" y2="8" stroke="rgba(201,168,76,0.85)" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.6;"><circle cx="22" cy="22" r="20" stroke="rgba(245,240,232,0.45)" stroke-width="1.4"/><rect x="13" y="13" width="18" height="18" rx="5" stroke="rgba(245,240,232,0.45)" stroke-width="1.5" fill="none"/><circle cx="22" cy="22" r="4.5" stroke="rgba(245,240,232,0.45)" stroke-width="1.5" fill="none"/><circle cx="28" cy="16" r="1.2" fill="rgba(245,240,232,0.45)"/><line x1="8" y1="36" x2="36" y2="8" stroke="rgba(201,168,76,0.85)" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.6;"><circle cx="22" cy="22" r="20" stroke="rgba(245,240,232,0.45)" stroke-width="1.4"/><path d="M27.5 12v8.5c0 0 1.8.8 4 .8v3.5c-2.3 0-4-1-4-1v7.2c0 3.5-2.8 6-6.2 6-3.4 0-6.3-2.5-6.3-6s2.9-6 6.3-6c.4 0 .7 0 1 .1v3.5c-.3-.1-.6-.1-1-.1-1.6 0-2.8 1.2-2.8 2.5s1.2 2.5 2.8 2.5c1.6 0 2.8-1.1 2.8-2.5V12h3.4z" fill="rgba(245,240,232,0.45)"/><line x1="8" y1="36" x2="36" y2="8" stroke="rgba(201,168,76,0.85)" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.6;"><circle cx="22" cy="22" r="20" stroke="rgba(245,240,232,0.45)" stroke-width="1.4"/><path d="M13 13l7.1 9.5L13 31h1.8l5.8-7 4.8 7H31l-7.5-10.2L30 13h-1.8l-5.3 6.3L18.5 13H13z" fill="rgba(245,240,232,0.45)"/><line x1="8" y1="36" x2="36" y2="8" stroke="rgba(201,168,76,0.85)" stroke-width="2.2" stroke-linecap="round"/></svg>
+  </div>
+  <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.5vw,42px);font-weight:300;font-style:italic;color:rgba(245,240,232,0.88);line-height:1.4;max-width:700px;margin:0 auto 14px;">Na sociálních sítích nás nenajdete.</p>
+  <p style="font-size:15px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(201,168,76,0.6);font-weight:500;">Fungujeme na doporučení, ne na lajcích.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">© 2025 Zasebe Finance. Všechna práva vyhrazena.</div>
+  <div class="footer-links">
+    <a href="#">Cookies</a>
+    <a href="#">Zásady ochrany osobních údajů</a>
+  </div>
+</footer>
+
+<script>
+  // Cursor — only on desktop
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursorRing');
+  if (cursor && ring && window.innerWidth > 1200) {
+    let mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+    (function animCursor(){
+      cursor.style.transform=`translate(${mx-4}px,${my-4}px)`;
+      rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+      ring.style.transform=`translate(${rx-18}px,${ry-18}px)`;
+      requestAnimationFrame(animCursor);
+    })();
+  }
+
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 70);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('open');
+    document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+  }
+  function closeMobileMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+</script>
+</body>
+</html>

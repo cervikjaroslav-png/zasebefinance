@@ -91,7 +91,7 @@
   .page-hero-tag { display:flex;align-items:center;gap:12px;margin-bottom:24px;animation:fadeUp .7s .05s ease both; }
   .page-hero-tag::before { content:'';width:40px;height:1px;background:var(--gold); }
   .page-hero-tag span { font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);font-weight:400; }
-  .page-hero-title { font-family:'Cormorant Garamond',serif;font-size:clamp(52px,6vw,88px);font-weight:300;line-height:1.0;color:var(--white);animation:fadeUp .7s .1s ease both;margin-bottom:10px; }
+  .page-hero-title { font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5.5vw,80px);font-weight:300;line-height:1.0;color:var(--white);animation:fadeUp .7s .1s ease both;margin-bottom:10px; }
   .page-hero-title em { font-style:italic;color:var(--gold); }
   .page-hero-subtitle { font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.2vw,28px);font-weight:300;font-style:italic;color:rgba(245,240,232,.45);animation:fadeUp .7s .15s ease both;margin-bottom:32px; }
   .page-hero-desc { font-size:14px;line-height:1.85;color:rgba(245,240,232,.5);max-width:520px;animation:fadeUp .7s .2s ease both;font-weight:300;margin-bottom:44px; }
@@ -299,13 +299,13 @@
 @media (max-width: 1200px) {
 
   /* NAV */
-  nav { padding: 16px 20px !important; }
-  nav.scrolled { padding: 12px 20px !important; }
+  nav { padding: 16px 24px !important; }
+  nav.scrolled { padding: 12px 24px !important; }
   .nav-links { display: none !important; }
   .nav-cta { display: none !important; }
-  .logo-text span:first-child { font-size: 16px !important; letter-spacing: 1px !important; }
-  .logo-text span:nth-child(2) { font-size: 8px !important; letter-spacing: 2px !important; }
-  .logo-powered { font-size: 8px !important; letter-spacing: 1px !important; }
+  .logo-text span:first-child { font-size: 18px !important; letter-spacing: 2px !important; }
+  .logo-text span:nth-child(2) { font-size: 10px !important; letter-spacing: 2px !important; }
+  .logo-powered { font-size: 9px !important; letter-spacing: 1px !important; }
 
   /* HERO */
   .hero { grid-template-columns: 1fr !important; min-height: auto !important; }
@@ -314,7 +314,7 @@
   .hero-title { font-size: clamp(36px, 10vw, 54px) !important; }
   .hero-subtitle, .page-hero-subtitle { font-size: 18px !important; }
   .hero-actions { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; }
-  .btn-primary { padding: 14px 28px !important; font-size: 9px !important; }
+  .btn-primary { padding: 16px 32px !important; font-size: 11px !important; }
   .scroll-ind { display: none !important; }
 
   /* PAGE HERO */
@@ -350,6 +350,7 @@
   /* SECTION TITLES */
   .section-title { font-size: clamp(28px, 8vw, 40px) !important; }
   .sec-title { font-size: clamp(28px, 8vw, 40px) !important; }
+  .section-tag span { font-size: 10px !important; letter-spacing: 2.5px !important; }
 
   /* OFFER GRID (investice) */
   .offer { padding: 60px 24px !important; }
@@ -395,6 +396,8 @@
   /* FOOTER */
   footer { padding: 40px 24px !important; flex-direction: column !important; gap: 16px !important; text-align: center !important; }
   .footer-links { flex-wrap: wrap !important; justify-content: center !important; gap: 16px !important; }
+  .footer-copy { font-size: 12px !important; }
+  .footer-links a { font-size: 12px !important; }
 
   /* SOCIAL SIDEBAR */
   .social-sidebar { display: none !important; }
@@ -432,7 +435,7 @@
 
   /* Hero akce — plná šířka na mobilu */
   .hero-actions { flex-direction: column !important; align-items: stretch !important; gap: 16px !important; }
-  .btn-primary { justify-content: center !important; width: 100% !important; padding: 16px 28px !important; font-size: 10px !important; }
+  .btn-primary { justify-content: center !important; width: 100% !important; padding: 16px 32px !important; font-size: 11px !important; }
   .hero-link { text-align: center !important; display: block !important; padding: 12px 0 !important; }
 
   /* How kroky — čitelnější na mobilu */
@@ -467,7 +470,7 @@
 }
 
 @media (max-width: 480px) {
-  .hero-title, .page-hero-title { font-size: 30px !important; line-height: 1.15 !important; }
+  .hero-title, .page-hero-title { font-size: 34px !important; line-height: 1.15 !important; }
   .page-hero-subtitle { font-size: 16px !important; }
   .page-hero-left { padding: 90px 20px 40px 20px !important; }
   .about-right { grid-template-columns: 1fr 1fr !important; }
@@ -830,15 +833,17 @@
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="zasebe-finance.html#o-nas" onclick="closeMobileMenu(); window.location='zasebe-finance.html#o-nas'; return false;">O nás</a>
-  <div class="menu-line"></div>
   <a href="zasebe-investice.html" onclick="closeMobileMenu(); window.location='zasebe-investice.html'; return false;">Investice</a>
+  <div class="menu-line"></div>
+  <a href="zasebe-crypto.html" onclick="closeMobileMenu(); window.location='zasebe-crypto.html'; return false;">Crypto</a>
   <div class="menu-line"></div>
   <a href="zasebe-reality.html" onclick="closeMobileMenu(); window.location='zasebe-reality.html'; return false;">Reality</a>
   <div class="menu-line"></div>
   <a href="zasebe-finance-pojisteni.html" onclick="closeMobileMenu(); window.location='zasebe-finance-pojisteni.html'; return false;">Pojištění</a>
   <div class="menu-line"></div>
   <a href="zasebe-finance.html#kontakt" onclick="closeMobileMenu(); window.location='zasebe-finance.html#kontakt'; return false;">Kontakt</a>
+  <div class="menu-line"></div>
+  <a href="zasebe-finance.html#o-nas" onclick="closeMobileMenu(); window.location='zasebe-finance.html#o-nas'; return false;">O nás</a>
 </div>
 
 <div class="cursor" id="cursor"></div>
@@ -855,11 +860,12 @@
     </div>
   </a>
   <ul class="nav-links">
-    <li><a href="zasebe-finance.html#o-nas">O nás</a></li>
     <li><a href="zasebe-investice.html">Investice</a></li>
+    <li><a href="zasebe-crypto.html">Crypto</a></li>
     <li><a href="zasebe-reality.html" class="active">Reality</a></li>
     <li><a href="zasebe-finance-pojisteni.html">Pojištění</a></li>
     <li><a href="zasebe-finance.html#kontakt">Kontakt</a></li>
+    <li><a href="zasebe-finance.html#o-nas">O nás</a></li>
   </ul>
   <button class="nav-cta" onclick="document.querySelector('.cta-section').scrollIntoView({behavior:'smooth'})">Domluvit schůzku</button>
 <div class="hamburger" id="hamburger" onclick="toggleMenu()">
@@ -1177,19 +1183,18 @@
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-bottom:56px;" class="reveal rt-header">
     <div>
       <div class="section-tag"><span>Makroekonomika</span></div>
-      <h2 class="section-title">Sazby & <em>inflace</em><br>v číslech</h2>
+      <h2 class="section-title">Sazby & <em>ceny bytů</em><br>v číslech</h2>
     </div>
     <p style="font-size:15px;line-height:1.9;color:rgba(245,240,232,.6);font-weight:300;align-self:end;">
-      Hypoteční sazby a inflace jsou dva klíčové faktory každého realitního rozhodnutí.
-      Sledujte vývoj a <strong style="color:var(--gold);font-weight:500;">rozhodujte se se znalostí kontextu</strong> — ne jen na základě aktuální nabídky banky.
+      Hypoteční sazby a ceny bytů jsou dva klíčové faktory každého realitního rozhodnutí.
+      Sledujte vývoj a <strong style="color:var(--gold);font-weight:500;">rozhodujte se se znalostí kontextu</strong> — ne jen na základě aktuální nabídky.
     </p>
   </div>
 
   <!-- Tabs -->
   <div style="display:flex;gap:2px;margin-bottom:32px;" class="reveal rt-tabs">
     <button class="rt-tab active" onclick="rtShow('hypo',this)">🏠 Hypoteční sazby ČR</button>
-    <button class="rt-tab" onclick="rtShow('inflace',this)">📊 Inflace ČR</button>
-    <button class="rt-tab" onclick="rtShow('eu',this)">🇪🇺 Sazby ECB</button>
+    <button class="rt-tab" onclick="rtShow('byty',this)">🏢 Průměrné ceny bytů</button>
   </div>
 
   <!-- Chart wrapper -->
@@ -1295,48 +1300,45 @@
     ]
   };
 
-  // Inflace ČR — meziroční % (zdroj: ČSÚ)
-  const inflaceData = {
-    labels:['01/20','07/20','01/21','07/21','01/22','07/22','01/23','07/23','01/24','07/24','01/25','02/25'],
+  // Průměrné ceny bytů — Kč/m² (zdroj: ČSÚ, Deloitte Reality Index)
+  const bytyData = {
+    labels:['2019','2020','2021','2022','2023','2024'],
     datasets:[
       {
-        label:'Meziroční inflace ČR (%)',
-        data:[3.6, 3.4, 2.2, 3.4, 8.8, 17.5, 17.5, 8.8, 2.9, 2.2, 2.8, 2.7],
-        color:'rgba(201,168,76,1)', fill:'rgba(201,168,76,0.12)'
+        label:'Praha',
+        data:[89200, 93500, 107800, 118500, 112000, 119800],
+        color:'rgba(201,168,76,1)', fill:false,
+        unit:'kc'
       },
       {
-        label:'Cíl ČNB (2 %)',
-        data:[2,2,2,2,2,2,2,2,2,2,2,2],
-        color:'rgba(74,222,128,0.5)', fill:false,
-        dash:[8,4]
+        label:'Brno',
+        data:[62500, 66800, 78400, 85200, 80500, 86900],
+        color:'rgba(150,180,220,0.85)', fill:false,
+        unit:'kc'
+      },
+      {
+        label:'Zlín',
+        data:[32800, 35100, 42600, 48900, 46200, 50500],
+        color:'rgba(240,160,60,0.85)', fill:false,
+        unit:'kc'
+      },
+      {
+        label:'Kroměříž',
+        data:[26400, 28200, 34500, 40100, 37800, 42300],
+        color:'rgba(180,120,230,0.85)', fill:false,
+        unit:'kc'
+      },
+      {
+        label:'Ostrava',
+        data:[28500, 30200, 37800, 43500, 41200, 44800],
+        color:'rgba(74,222,128,0.75)', fill:false,
+        unit:'kc'
       }
     ],
     info:[
-      {label:'Inflace 02/2025',val:'2,7 %',sub:'Meziroční změna CPI',hl:true},
-      {label:'Cíl ČNB',val:'2,0 %',sub:'Toleranční pásmo ±1 %',hl:false},
-      {label:'Peak inflace',val:'17,5 %',sub:'Leden 2023 — nejvyšší za 30 let',hl:false}
-    ]
-  };
-
-  // Sazby ECB
-  const ecbData = {
-    labels:['01/20','07/20','01/21','07/21','01/22','07/22','01/23','07/23','01/24','07/24','01/25','03/25'],
-    datasets:[
-      {
-        label:'Deposit facility rate ECB',
-        data:[0.00,-0.50,-0.50,-0.50,-0.50, 0.00, 2.50, 3.75, 4.00, 3.75, 2.75, 2.50],
-        color:'rgba(201,168,76,1)', fill:'rgba(201,168,76,0.10)'
-      },
-      {
-        label:'Euribor 3M',
-        data:[-0.35,-0.50,-0.55,-0.55,-0.55, 0.20, 2.60, 3.90, 3.90, 3.55, 2.60, 2.40],
-        color:'rgba(150,180,220,0.8)', fill:'rgba(150,180,220,0.05)'
-      }
-    ],
-    info:[
-      {label:'ECB deposit rate',val:'2,50 %',sub:'Platné od 03/2025',hl:true},
-      {label:'Euribor 3M',val:'~2,40 %',sub:'Klíčový pro EUR hypotéky',hl:false},
-      {label:'Trend',val:'↘ Klesá',sub:'ECB snižuje sazby od 09/2024',hl:false}
+      {label:'Praha 2024',val:'119 800',sub:'Kč/m² — nejdražší město ČR',hl:true},
+      {label:'Zlín 2024',val:'50 500',sub:'Kč/m² — stabilní růst',hl:true},
+      {label:'Kroměříž 2024',val:'42 300',sub:'Kč/m² — dostupné bydlení',hl:false}
     ]
   };
 
@@ -1344,53 +1346,40 @@
     hypo: [
       {
         term: 'Co je hypoteční sazba?',
-        text: 'Hypoteční sazba je úrok, který platíte bance za zapůjčené peníze na koupi nemovitosti. Čím nižší sazba, tím nižší měsíční splátka. Například při hypotéce 3 000 000 Kč na 30 let znamená rozdíl 1 % rozdíl přibližně 1 500 Kč v měsíční splátce — a statisíce korun za celou dobu splácení.'
+        text: 'Úrok, který platíte bance za zapůjčené peníze na koupi nemovitosti. Rozdíl 1 % u hypotéky 3 mil. Kč na 30 let znamená přibližně 1 500 Kč v měsíční splátce — a statisíce korun za celou dobu splácení.'
       },
       {
         term: 'Co je fixace?',
-        text: 'Fixace je doba, po kterou vám banka garantuje stejnou sazbu. Nejčastěji 2, 3 nebo 5 let. Po skončení fixace banka nabídne novou sazbu podle aktuálního trhu — proto se vyplatí sledovat vývoj sazeb dlouhodobě a refinancovat ve správný moment.'
+        text: 'Doba, po kterou banka garantuje stejnou sazbu — nejčastěji 2, 3 nebo 5 let. Po jejím skončení banka nabídne novou sazbu dle aktuálního trhu.'
       },
       {
         term: 'Co je repo sazba ČNB?',
-        text: 'Repo sazba je základní úroková sazba České národní banky — „cena peněz" pro komerční banky. Když ČNB repo sazbu zvyšuje, zdražují se úvěry a hypotéky. Když ji snižuje, banky mohou nabídnout levnější hypotéky. Právě proto je důležité sledovat rozhodnutí ČNB.'
+        text: 'Základní úroková sazba ČNB — „cena peněz" pro banky. Když ji ČNB zvyšuje, zdražují se hypotéky. Když snižuje, hypotéky zlevňují.'
       }
     ],
-    inflace: [
+    byty: [
       {
-        term: 'Co je inflace?',
-        text: 'Inflace je zjednodušeně řečeno zdražování. Pokud je inflace 10 %, znamená to, že za stejné zboží zaplatíte o 10 % více než před rokem. Pro investory je to klíčový ukazatel — peníze nečinně ležící na účtu inflací ztrácejí hodnotu. Proto se vyplatí investovat.'
+        term: 'Jak se stanovuje průměrná cena?',
+        text: 'Cena za m² vychází z realizovaných prodejů bytů v dané lokalitě. Data sbírá ČSÚ a analytické firmy jako Deloitte. Zahrnují novostavby i starší byty.'
       },
       {
-        term: 'Proč je inflace důležitá pro nemovitosti?',
-        text: 'Nemovitosti jsou tradičně považovány za ochranu proti inflaci — jejich hodnota zpravidla roste spolu s cenami. Zároveň ale vysoká inflace vedla k rychlému zdražení hypoték (viz 2022–2023), což ochlodilo poptávku. Dnes, kdy inflace klesá k cíli ČNB 2 %, se sazby postupně normalizují.'
+        term: 'Proč ceny klesly v 2023?',
+        text: 'Kombinace vysokých úrokových sazeb a inflace snížila poptávku. Mnoho kupujících na hypotéku nedosáhlo. V roce 2024 se se snižováním sazeb trh opět oživil.'
       },
       {
-        term: 'Cíl ČNB 2 %',
-        text: 'Česká národní banka se snaží udržet inflaci okolo 2 % ročně. Je to tzv. inflační cíl — dost vysoký na to, aby ekonomika rostla, ale dost nízký na to, aby peníze výrazně neztrácely hodnotu. Pokud inflace výrazně překročí 2 %, ČNB zpravidla zvýší úrokové sazby.'
-      }
-    ],
-    eu: [
-      {
-        term: 'Co je ECB a její sazby?',
-        text: 'ECB (Evropská centrální banka) je „ČNB celé eurozóny". Stanovuje základní úrokové sazby pro všechny země, které používají euro. Její rozhodnutí ovlivňují cenu hypoték v Německu, Francii, Slovensku i dalších zemích EU — a nepřímo i náladu na celých evropských trzích.'
-      },
-      {
-        term: 'Co je Euribor?',
-        text: 'Euribor je průměrná sazba, za kterou si evropské banky půjčují peníze navzájem. Slouží jako referenční sazba pro variabilní hypotéky v eurozóně — pokud má klient variabilní hypotéku v EUR, jeho splátka se mění právě podle Euriboru. Euribor 3M znamená sazbu na tříměsíční výpůjčky.'
-      },
-      {
-        term: 'Proč to sledovat jako Čech?',
-        text: 'Česká koruna je navázána na euro a česká ekonomika je úzce propojena s eurozónou. Vývoj ECB sazeb ovlivňuje kurz CZK/EUR, ceny nemovitostí v pohraničí, zájem zahraničních investorů i celkovou náladu na trhu. Kdo kupuje nemovitost jako investici, by měl sledovat obě centrální banky.'
+        term: 'Vyplatí se kupovat teď?',
+        text: 'Sazby klesají a ceny opět rostou. Historicky nemovitosti v ČR dlouhodobě zhodnocují. Záleží ale na lokalitě, účelu a vašem financování — rádi to s vámi probereme.'
       }
     ]
   };
 
-  const CHARTS = { hypo: hypoData, inflace: inflaceData, eu: ecbData };
+  const CHARTS = { hypo: hypoData, byty: bytyData };
   let inst = null;
 
   // ── render ────────────────────────────────────────────────────
   function render(key){
     const d = CHARTS[key];
+    const isKc = d.datasets[0].unit === 'kc';
     const ctx = document.getElementById('rtChart').getContext('2d');
     if(inst) inst.destroy();
 
@@ -1403,13 +1392,13 @@
           data: s.data,
           borderColor: s.color,
           backgroundColor: s.fill || 'transparent',
-          borderWidth: s.color.includes('201,168,76') ? 2.5 : 1.6,
+          borderWidth: s.color.includes('201,168,76') ? 2.5 : 2,
           borderDash: s.dash || [],
-          pointRadius: 0,
-          pointHoverRadius: 6,
+          pointRadius: isKc ? 5 : 0,
+          pointHoverRadius: 7,
           pointBackgroundColor: s.color,
-          tension: 0.35,
-          fill: s.fill !== false
+          tension: 0.3,
+          fill: s.fill && s.fill !== false
         }))
       },
       options:{
@@ -1427,7 +1416,9 @@
             bodyColor:'rgba(245,240,232,.75)',
             bodyFont:{family:'Montserrat',size:12},
             callbacks:{
-              label: c => '  '+c.dataset.label+':  '+c.parsed.y.toFixed(2)+' %',
+              label: c => isKc
+                ? '  '+c.dataset.label.split('(')[0].trim()+':  '+c.parsed.y.toLocaleString('cs-CZ')+' Kč/m²'
+                : '  '+c.dataset.label+':  '+c.parsed.y.toFixed(2)+' %',
               title: i => '  '+i[0].label
             }
           }
@@ -1440,7 +1431,7 @@
           },
           y:{
             grid:{color:'rgba(201,168,76,.05)'},
-            ticks:{color:'rgba(245,240,232,.25)',font:{family:'Montserrat',size:10},callback:v=>v+' %',maxTicksLimit:6},
+            ticks:{color:'rgba(245,240,232,.25)',font:{family:'Montserrat',size:10},callback:v=> isKc ? v.toLocaleString('cs-CZ')+' Kč' : v+' %',maxTicksLimit:6},
             border:{color:'rgba(201,168,76,.08)',dash:[4,4]}
           }
         }
@@ -1502,11 +1493,15 @@
 </section>
 
 <!-- NO SOCIAL -->
-<section style="padding:60px 60px;background:#0A0A0A;border-top:1px solid rgba(201,168,76,.08);text-align:center;">
-  <img src="social trash.png" alt="Třídíme odpad" style="max-width:260px;width:60%;margin:0 auto 20px;display:block;opacity:.85;">
-  <p style="font-size:13px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:400;margin:0 auto 14px;">Třídíme odpad.</p>
-  <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,30px);font-weight:300;font-style:italic;color:rgba(245,240,232,0.88);line-height:1.4;max-width:700px;margin:0 auto 10px;">Na sociálních sítích nás nenajdete.</p>
-  <p style="font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(201,168,76,0.6);font-weight:500;">Fungujeme na doporučení, ne na lajcích.</p>
+<section style="padding:50px 40px;background:#0A0A0A;border-top:1px solid rgba(201,168,76,.08);text-align:center;">
+  <div style="display:flex;align-items:center;justify-content:center;gap:36px;flex-wrap:wrap;margin-bottom:28px;">
+    <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.6;"><circle cx="22" cy="22" r="20" stroke="rgba(245,240,232,0.45)" stroke-width="1.4"/><path d="M24.5 14h2.5v-3.5h-2.8c-3.1 0-4.7 1.9-4.7 4.8v2.2H17v3.5h2.5V30h3.5v-9h2.8l.5-3.5h-3.3v-1.8c0-1 .3-1.7 1.5-1.7z" fill="rgba(245,240,232,0.45)"/><line x1="8" y1="36" x2="36" y2="8" stroke="rgba(201,168,76,0.85)" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.6;"><circle cx="22" cy="22" r="20" stroke="rgba(245,240,232,0.45)" stroke-width="1.4"/><rect x="13" y="13" width="18" height="18" rx="5" stroke="rgba(245,240,232,0.45)" stroke-width="1.5" fill="none"/><circle cx="22" cy="22" r="4.5" stroke="rgba(245,240,232,0.45)" stroke-width="1.5" fill="none"/><circle cx="28" cy="16" r="1.2" fill="rgba(245,240,232,0.45)"/><line x1="8" y1="36" x2="36" y2="8" stroke="rgba(201,168,76,0.85)" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.6;"><circle cx="22" cy="22" r="20" stroke="rgba(245,240,232,0.45)" stroke-width="1.4"/><path d="M27.5 12v8.5c0 0 1.8.8 4 .8v3.5c-2.3 0-4-1-4-1v7.2c0 3.5-2.8 6-6.2 6-3.4 0-6.3-2.5-6.3-6s2.9-6 6.3-6c.4 0 .7 0 1 .1v3.5c-.3-.1-.6-.1-1-.1-1.6 0-2.8 1.2-2.8 2.5s1.2 2.5 2.8 2.5c1.6 0 2.8-1.1 2.8-2.5V12h3.4z" fill="rgba(245,240,232,0.45)"/><line x1="8" y1="36" x2="36" y2="8" stroke="rgba(201,168,76,0.85)" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.6;"><circle cx="22" cy="22" r="20" stroke="rgba(245,240,232,0.45)" stroke-width="1.4"/><path d="M13 13l7.1 9.5L13 31h1.8l5.8-7 4.8 7H31l-7.5-10.2L30 13h-1.8l-5.3 6.3L18.5 13H13z" fill="rgba(245,240,232,0.45)"/><line x1="8" y1="36" x2="36" y2="8" stroke="rgba(201,168,76,0.85)" stroke-width="2.2" stroke-linecap="round"/></svg>
+  </div>
+  <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.5vw,42px);font-weight:300;font-style:italic;color:rgba(245,240,232,0.88);line-height:1.4;max-width:700px;margin:0 auto 14px;">Na sociálních sítích nás nenajdete.</p>
+  <p style="font-size:15px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(201,168,76,0.6);font-weight:500;">Fungujeme na doporučení, ne na lajcích.</p>
 </section>
 
 <!-- FOOTER -->

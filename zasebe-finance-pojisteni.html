@@ -191,7 +191,7 @@
   .service-icon svg { width:100%;height:100%;stroke:var(--gold);fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round; }
   .service-name {
     font-family:'Cormorant Garamond',serif;
-    font-size:27px;font-weight:400;
+    font-size:28px;font-weight:400;
     color:var(--white);margin-bottom:14px;line-height:1.2;
   }
   .service-desc {
@@ -373,13 +373,13 @@
 @media (max-width: 1200px) {
 
   /* NAV */
-  nav { padding: 16px 20px !important; }
-  nav.scrolled { padding: 12px 20px !important; }
+  nav { padding: 16px 24px !important; }
+  nav.scrolled { padding: 12px 24px !important; }
   .nav-links { display: none !important; }
   .nav-cta { display: none !important; }
-  .logo-text span:first-child { font-size: 16px !important; letter-spacing: 1px !important; }
-  .logo-text span:nth-child(2) { font-size: 8px !important; letter-spacing: 2px !important; }
-  .logo-powered { font-size: 8px !important; letter-spacing: 1px !important; }
+  .logo-text span:first-child { font-size: 18px !important; letter-spacing: 2px !important; }
+  .logo-text span:nth-child(2) { font-size: 10px !important; letter-spacing: 2px !important; }
+  .logo-powered { font-size: 9px !important; letter-spacing: 1px !important; }
 
   /* HERO */
   .hero { grid-template-columns: 1fr !important; min-height: auto !important; }
@@ -388,7 +388,7 @@
   .hero-title { font-size: clamp(36px, 10vw, 54px) !important; }
   .hero-subtitle, .page-hero-subtitle { font-size: 18px !important; }
   .hero-actions { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; }
-  .btn-primary { padding: 14px 28px !important; font-size: 9px !important; }
+  .btn-primary { padding: 16px 32px !important; font-size: 11px !important; }
   .scroll-ind { display: none !important; }
 
   /* PAGE HERO */
@@ -424,6 +424,7 @@
   /* SECTION TITLES */
   .section-title { font-size: clamp(28px, 8vw, 40px) !important; }
   .sec-title { font-size: clamp(28px, 8vw, 40px) !important; }
+  .section-tag span { font-size: 10px !important; letter-spacing: 2.5px !important; }
 
   /* OFFER GRID (investice) */
   .offer { padding: 60px 24px !important; }
@@ -469,6 +470,8 @@
   /* FOOTER */
   footer { padding: 40px 24px !important; flex-direction: column !important; gap: 16px !important; text-align: center !important; }
   .footer-links { flex-wrap: wrap !important; justify-content: center !important; gap: 16px !important; }
+  .footer-copy { font-size: 12px !important; }
+  .footer-links a { font-size: 12px !important; }
 
   /* SOCIAL SIDEBAR */
   .social-sidebar { display: none !important; }
@@ -769,15 +772,17 @@
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="zasebe-finance.html#o-nas" onclick="closeMobileMenu(); window.location='zasebe-finance.html#o-nas'; return false;">O nás</a>
-  <div class="menu-line"></div>
   <a href="zasebe-investice.html" onclick="closeMobileMenu(); window.location='zasebe-investice.html'; return false;">Investice</a>
+  <div class="menu-line"></div>
+  <a href="zasebe-crypto.html" onclick="closeMobileMenu(); window.location='zasebe-crypto.html'; return false;">Crypto</a>
   <div class="menu-line"></div>
   <a href="zasebe-reality.html" onclick="closeMobileMenu(); window.location='zasebe-reality.html'; return false;">Reality</a>
   <div class="menu-line"></div>
   <a href="zasebe-finance-pojisteni.html" onclick="closeMobileMenu(); window.location='zasebe-finance-pojisteni.html'; return false;">Pojištění</a>
   <div class="menu-line"></div>
   <a href="zasebe-finance.html#kontakt" onclick="closeMobileMenu(); window.location='zasebe-finance.html#kontakt'; return false;">Kontakt</a>
+  <div class="menu-line"></div>
+  <a href="zasebe-finance.html#o-nas" onclick="closeMobileMenu(); window.location='zasebe-finance.html#o-nas'; return false;">O nás</a>
 </div>
 
 <div class="cursor" id="cursor"></div>
@@ -794,11 +799,12 @@
     </div>
   </a>
   <ul class="nav-links">
-    <li><a href="zasebe-finance.html#o-nas">O nás</a></li>
     <li><a href="zasebe-investice.html">Investice</a></li>
+    <li><a href="zasebe-crypto.html">Crypto</a></li>
     <li><a href="zasebe-reality.html">Reality</a></li>
     <li><a href="zasebe-finance-pojisteni.html" class="active">Pojištění</a></li>
     <li><a href="zasebe-finance.html#kontakt">Kontakt</a></li>
+    <li><a href="zasebe-finance.html#o-nas">O nás</a></li>
   </ul>
   <button class="nav-cta" onclick="document.querySelector('.cta-section').scrollIntoView({behavior:'smooth'})">Domluvit schůzku</button>
 <div class="hamburger" id="hamburger" onclick="toggleMenu()">
@@ -979,6 +985,187 @@
   </div>
 </section>
 
+<!-- ═══ MÝTUS VS. REALITA ═══ -->
+<section style="padding:100px 60px;background:var(--dark2);border-top:1px solid rgba(201,168,76,.1);" id="mytus">
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-bottom:56px;" class="reveal mvr-header">
+    <div>
+      <div class="section-tag"><span>Pojištění v číslech</span></div>
+      <h2 class="section-title">Mýtus vs.<br><em>realita</em></h2>
+    </div>
+    <p style="font-size:15px;line-height:1.9;color:rgba(245,240,232,.6);font-weight:300;align-self:end;">
+      Většina lidí pojištění podceňuje — dokud nepřijde škoda. Podívejte se, jak <strong style="color:var(--gold);font-weight:500;">málo stojí klid</strong> ve srovnání s tím, co může přijít.
+    </p>
+  </div>
+
+  <!-- Tabs -->
+  <div style="display:flex;gap:2px;margin-bottom:32px;" class="reveal mvr-tabs">
+    <button class="mvr-tab active" onclick="mvrShow('graf',this)">📊 Pojistné vs. škoda</button>
+    <button class="mvr-tab" onclick="mvrShow('myty',this)">💡 Mýty o pojištění</button>
+  </div>
+
+  <!-- TAB: GRAF -->
+  <div id="mvr-graf">
+    <div class="reveal" style="position:relative;background:var(--black);border:1px solid rgba(201,168,76,.12);padding:40px 40px 32px;">
+      <div style="position:absolute;top:0;left:0;width:32px;height:32px;border-top:2px solid var(--gold);border-left:2px solid var(--gold);"></div>
+      <div style="position:absolute;bottom:0;right:0;width:32px;height:32px;border-bottom:2px solid var(--gold);border-right:2px solid var(--gold);"></div>
+      <canvas id="mvrChart" style="width:100%;height:340px;max-height:340px;"></canvas>
+      <div style="display:flex;gap:28px;margin-top:20px;padding-top:16px;border-top:1px solid rgba(201,168,76,.06);">
+        <div style="display:flex;align-items:center;gap:8px;"><div style="width:14px;height:14px;background:rgba(201,168,76,.75);border-radius:2px;"></div><span style="font-size:12px;color:rgba(245,240,232,.45);">Pojistné za 10 let</span></div>
+        <div style="display:flex;align-items:center;gap:8px;"><div style="width:14px;height:14px;background:rgba(248,113,113,.65);border-radius:2px;"></div><span style="font-size:12px;color:rgba(245,240,232,.45);">Průměrná škoda</span></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:2px;" class="mvr-info-grid">
+      <div class="mvr-info-box mvr-info-hl">
+        <div class="mvr-info-label">Největší rozdíl</div>
+        <div class="mvr-info-val">Nemovitost</div>
+        <div class="mvr-info-sub">48 tis. pojistné vs. 340 tis. škoda — 7× návratnost</div>
+      </div>
+      <div class="mvr-info-box">
+        <div class="mvr-info-label">Nejlevnější ochrana</div>
+        <div class="mvr-info-val">Odpovědnost</div>
+        <div class="mvr-info-sub">50 Kč/měsíc — kryje škody až 95 000 Kč</div>
+      </div>
+      <div class="mvr-info-box">
+        <div class="mvr-info-label">Průměrná návratnost</div>
+        <div class="mvr-info-val">5–7×</div>
+        <div class="mvr-info-sub">Průměrné plnění je 5–7× vyšší než zaplacené pojistné</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: MÝTY -->
+  <div id="mvr-myty" style="display:none;">
+    <div class="mvr-cards reveal">
+      <div class="mvr-card">
+        <div class="mvr-myth"><div class="mvr-label mvr-label-myth">Mýtus</div><p>„Pojištění domácnosti je zbytečný výdaj."</p></div>
+        <div class="mvr-reality"><div class="mvr-label mvr-label-reality">Realita</div>
+          <p>Průměrná škoda: <strong>185 000 Kč</strong>. Pojistné za 10 let: <strong>24 000 Kč</strong>.</p>
+          <div class="mvr-bar-wrap">
+            <div class="mvr-bar-row"><span class="mvr-bar-label">Pojistné 10 let</span><div class="mvr-bar" style="width:13%;background:var(--gold);"><span>24 tis.</span></div></div>
+            <div class="mvr-bar-row"><span class="mvr-bar-label">Průměrná škoda</span><div class="mvr-bar" style="width:100%;background:#f87171;"><span>185 tis.</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="mvr-card">
+        <div class="mvr-myth"><div class="mvr-label mvr-label-myth">Mýtus</div><p>„Úrazovka se vyplatí jen sportovcům."</p></div>
+        <div class="mvr-reality"><div class="mvr-label mvr-label-reality">Realita</div>
+          <p>80 % úrazů se stane doma nebo v práci. Plnění: <strong>120 000 Kč</strong>. Pojistné: <strong>18 000 Kč</strong>.</p>
+          <div class="mvr-bar-wrap">
+            <div class="mvr-bar-row"><span class="mvr-bar-label">Pojistné 10 let</span><div class="mvr-bar" style="width:15%;background:var(--gold);"><span>18 tis.</span></div></div>
+            <div class="mvr-bar-row"><span class="mvr-bar-label">Průměrné plnění</span><div class="mvr-bar" style="width:100%;background:#f87171;"><span>120 tis.</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="mvr-card">
+        <div class="mvr-myth"><div class="mvr-label mvr-label-myth">Mýtus</div><p>„Dům je pojištěný přes banku."</p></div>
+        <div class="mvr-reality"><div class="mvr-label mvr-label-reality">Realita</div>
+          <p>Bankovní pojistka kryje jen stavbu. Škoda: <strong>340 000 Kč</strong>. Pojistné: <strong>48 000 Kč</strong>.</p>
+          <div class="mvr-bar-wrap">
+            <div class="mvr-bar-row"><span class="mvr-bar-label">Pojistné 10 let</span><div class="mvr-bar" style="width:14%;background:var(--gold);"><span>48 tis.</span></div></div>
+            <div class="mvr-bar-row"><span class="mvr-bar-label">Průměrná škoda</span><div class="mvr-bar" style="width:100%;background:#f87171;"><span>340 tis.</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:2px;" class="mvr-explain-grid reveal">
+      <div style="background:var(--dark3);padding:32px 36px;border-left:2px solid rgba(201,168,76,.2);">
+        <div style="font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;font-weight:500;">Proč pojistit domácnost?</div>
+        <p style="font-size:13px;line-height:1.8;color:rgba(245,240,232,.5);font-weight:300;margin:0;">Vytopení, požár, krádež — jeden incident a přijdete o vybavení za statisíce. Pojistka za 200 Kč/měsíc to celé pokryje.</p>
+      </div>
+      <div style="background:var(--dark3);padding:32px 36px;border-left:2px solid rgba(201,168,76,.2);">
+        <div style="font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;font-weight:500;">Proč úrazové pojištění?</div>
+        <p style="font-size:13px;line-height:1.8;color:rgba(245,240,232,.5);font-weight:300;margin:0;">Zlomenina, hospitalizace — i běžný úraz znamená výpadek příjmu. Pojistka kompenzuje ztrátu a pokryje léčbu.</p>
+      </div>
+      <div style="background:var(--dark3);padding:32px 36px;border-left:2px solid rgba(201,168,76,.2);">
+        <div style="font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;font-weight:500;">Proč pojistit nemovitost?</div>
+        <p style="font-size:13px;line-height:1.8;color:rgba(245,240,232,.5);font-weight:300;margin:0;">Bankovní vinkulace kryje jen stavbu. Správná pojistka chrání i vybavení, odpovědnost a škody sousedům.</p>
+      </div>
+    </div>
+  </div>
+
+  <p style="margin-top:16px;font-size:11px;color:rgba(245,240,232,.2);font-style:italic;" class="reveal">
+    * Data jsou orientační, vycházejí z průměrných hodnot pojistného plnění v ČR.
+  </p>
+</section>
+
+<style>
+.mvr-tab{background:var(--dark3);border:none;color:rgba(245,240,232,.4);padding:12px 28px;font-family:'Montserrat',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:400;cursor:pointer;transition:all .3s;border-bottom:2px solid transparent;}
+.mvr-tab:hover{color:rgba(245,240,232,.7);background:rgba(201,168,76,.04);}
+.mvr-tab.active{color:var(--gold);border-bottom-color:var(--gold);background:rgba(201,168,76,.07);}
+.mvr-info-box{background:var(--black);padding:28px 32px;border-top:2px solid rgba(201,168,76,.15);}
+.mvr-info-hl{border-top-color:var(--gold);background:rgba(201,168,76,.05);}
+.mvr-info-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(245,240,232,.3);margin-bottom:10px;}
+.mvr-info-val{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:var(--gold);line-height:1;}
+.mvr-info-sub{font-size:12px;color:rgba(245,240,232,.4);margin-top:8px;line-height:1.6;}
+.mvr-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
+.mvr-card{background:var(--black);overflow:hidden;}
+.mvr-myth{padding:28px 28px 20px;border-left:3px solid rgba(248,113,113,.3);}
+.mvr-myth p{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;font-style:italic;color:rgba(245,240,232,.7);line-height:1.4;margin:0;}
+.mvr-reality{padding:20px 28px 28px;background:rgba(201,168,76,.03);}
+.mvr-reality p{font-size:13px;line-height:1.8;color:rgba(245,240,232,.55);font-weight:300;margin:0 0 16px;}
+.mvr-reality p strong{color:var(--gold);font-weight:600;}
+.mvr-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;font-weight:600;margin-bottom:10px;}
+.mvr-label-myth{color:#f87171;}
+.mvr-label-reality{color:#4ade80;}
+.mvr-bar-wrap{display:flex;flex-direction:column;gap:6px;}
+.mvr-bar-row{display:flex;align-items:center;gap:10px;}
+.mvr-bar-label{font-size:9px;color:rgba(245,240,232,.3);width:100px;flex-shrink:0;text-align:right;}
+.mvr-bar{height:24px;border-radius:3px;display:flex;align-items:center;padding:0 10px;min-width:36px;}
+.mvr-bar span{font-size:10px;font-weight:600;color:var(--black);white-space:nowrap;}
+@media(max-width:1200px){
+  #mytus{padding:70px 24px!important;}
+  .mvr-header{grid-template-columns:1fr!important;gap:20px!important;margin-bottom:36px!important;}
+  .mvr-cards{grid-template-columns:1fr!important;}
+  .mvr-info-grid{grid-template-columns:1fr!important;}
+  .mvr-explain-grid{grid-template-columns:1fr!important;}
+  .mvr-tabs{flex-wrap:wrap!important;}
+  .mvr-tab{font-size:9px!important;padding:10px 16px!important;}
+  canvas#mvrChart{height:260px!important;max-height:260px!important;}
+  .mvr-info-val{font-size:30px!important;}
+  .mvr-info-box{padding:20px 22px!important;}
+}
+@media(max-width:480px){
+  .mvr-tab{font-size:8px!important;padding:9px 12px!important;letter-spacing:1.5px!important;}
+  canvas#mvrChart{height:200px!important;max-height:200px!important;}
+  .mvr-info-val{font-size:24px!important;}
+  .mvr-bar-label{width:70px!important;font-size:8px!important;}
+}
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+(function(){
+  window.mvrShow = function(key, btn){
+    document.querySelectorAll('.mvr-tab').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('mvr-graf').style.display = key==='graf'?'':'none';
+    document.getElementById('mvr-myty').style.display = key==='myty'?'':'none';
+  };
+  const ctx = document.getElementById('mvrChart');
+  if(ctx){
+    new Chart(ctx.getContext('2d'),{
+      type:'bar',
+      data:{
+        labels:['Domácnost','Úraz','Nemovitost','Auto (havarijní)','Odpovědnost'],
+        datasets:[
+          {label:'Pojistné za 10 let',data:[24000,18000,48000,72000,6000],backgroundColor:'rgba(201,168,76,0.75)',borderColor:'rgba(201,168,76,1)',borderWidth:1,borderRadius:3},
+          {label:'Průměrná škoda',data:[185000,120000,340000,210000,95000],backgroundColor:'rgba(248,113,113,0.65)',borderColor:'rgba(248,113,113,1)',borderWidth:1,borderRadius:3}
+        ]
+      },
+      options:{
+        responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(10,10,10,.97)',borderColor:'rgba(201,168,76,.2)',borderWidth:1,padding:14,titleColor:'rgba(201,168,76,.7)',titleFont:{family:'Montserrat',size:10},bodyColor:'rgba(245,240,232,.75)',bodyFont:{family:'Montserrat',size:12},callbacks:{label:c=>'  '+c.dataset.label+':  '+c.parsed.y.toLocaleString('cs-CZ')+' Kč'}}},
+        scales:{
+          x:{grid:{display:false},ticks:{color:'rgba(245,240,232,.3)',font:{family:'Montserrat',size:10},maxRotation:0},border:{color:'rgba(201,168,76,.08)'}},
+          y:{grid:{color:'rgba(201,168,76,.04)'},ticks:{color:'rgba(245,240,232,.2)',font:{family:'Montserrat',size:10},callback:v=>(v/1000)+' tis.',maxTicksLimit:6},border:{color:'rgba(201,168,76,.08)',dash:[4,4]}}
+        }
+      }
+    });
+  }
+})();
+</script>
+
 <!-- CTA -->
 <section class="cta-section">
   <div class="cta-bg"></div>
@@ -992,11 +1179,15 @@
 </section>
 
 <!-- NO SOCIAL -->
-<section style="padding:60px 60px;background:#0A0A0A;border-top:1px solid rgba(201,168,76,.08);text-align:center;">
-  <img src="social trash.png" alt="Třídíme odpad" style="max-width:260px;width:60%;margin:0 auto 20px;display:block;opacity:.85;">
-  <p style="font-size:13px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:400;margin:0 auto 14px;">Třídíme odpad.</p>
-  <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,30px);font-weight:300;font-style:italic;color:rgba(245,240,232,0.88);line-height:1.4;max-width:700px;margin:0 auto 10px;">Na sociálních sítích nás nenajdete.</p>
-  <p style="font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(201,168,76,0.6);font-weight:500;">Fungujeme na doporučení, ne na lajcích.</p>
+<section style="padding:50px 40px;background:#0A0A0A;border-top:1px solid rgba(201,168,76,.08);text-align:center;">
+  <div style="display:flex;align-items:center;justify-content:center;gap:36px;flex-wrap:wrap;margin-bottom:28px;">
+    <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.6;"><circle cx="22" cy="22" r="20" stroke="rgba(245,240,232,0.45)" stroke-width="1.4"/><path d="M24.5 14h2.5v-3.5h-2.8c-3.1 0-4.7 1.9-4.7 4.8v2.2H17v3.5h2.5V30h3.5v-9h2.8l.5-3.5h-3.3v-1.8c0-1 .3-1.7 1.5-1.7z" fill="rgba(245,240,232,0.45)"/><line x1="8" y1="36" x2="36" y2="8" stroke="rgba(201,168,76,0.85)" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.6;"><circle cx="22" cy="22" r="20" stroke="rgba(245,240,232,0.45)" stroke-width="1.4"/><rect x="13" y="13" width="18" height="18" rx="5" stroke="rgba(245,240,232,0.45)" stroke-width="1.5" fill="none"/><circle cx="22" cy="22" r="4.5" stroke="rgba(245,240,232,0.45)" stroke-width="1.5" fill="none"/><circle cx="28" cy="16" r="1.2" fill="rgba(245,240,232,0.45)"/><line x1="8" y1="36" x2="36" y2="8" stroke="rgba(201,168,76,0.85)" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.6;"><circle cx="22" cy="22" r="20" stroke="rgba(245,240,232,0.45)" stroke-width="1.4"/><path d="M27.5 12v8.5c0 0 1.8.8 4 .8v3.5c-2.3 0-4-1-4-1v7.2c0 3.5-2.8 6-6.2 6-3.4 0-6.3-2.5-6.3-6s2.9-6 6.3-6c.4 0 .7 0 1 .1v3.5c-.3-.1-.6-.1-1-.1-1.6 0-2.8 1.2-2.8 2.5s1.2 2.5 2.8 2.5c1.6 0 2.8-1.1 2.8-2.5V12h3.4z" fill="rgba(245,240,232,0.45)"/><line x1="8" y1="36" x2="36" y2="8" stroke="rgba(201,168,76,0.85)" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.6;"><circle cx="22" cy="22" r="20" stroke="rgba(245,240,232,0.45)" stroke-width="1.4"/><path d="M13 13l7.1 9.5L13 31h1.8l5.8-7 4.8 7H31l-7.5-10.2L30 13h-1.8l-5.3 6.3L18.5 13H13z" fill="rgba(245,240,232,0.45)"/><line x1="8" y1="36" x2="36" y2="8" stroke="rgba(201,168,76,0.85)" stroke-width="2.2" stroke-linecap="round"/></svg>
+  </div>
+  <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.5vw,42px);font-weight:300;font-style:italic;color:rgba(245,240,232,0.88);line-height:1.4;max-width:700px;margin:0 auto 14px;">Na sociálních sítích nás nenajdete.</p>
+  <p style="font-size:15px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(201,168,76,0.6);font-weight:500;">Fungujeme na doporučení, ne na lajcích.</p>
 </section>
 
 <!-- FOOTER -->
