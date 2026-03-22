@@ -567,12 +567,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 40px;
+  gap: 24px;
+  padding-top: 70px;
 }
 .mobile-menu.open { display: flex; }
 .mobile-menu a {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 36px; font-weight: 300;
+  font-size: 28px; font-weight: 300;
   color: rgba(245,240,232,0.7);
   text-decoration: none;
   letter-spacing: 2px;
@@ -580,7 +581,7 @@
 }
 .mobile-menu a:hover { color: var(--gold); }
 .mobile-menu .menu-line {
-  width: 40px; height: 1px;
+  width: 30px; height: 1px;
   background: rgba(201,168,76,0.2);
 }
 
@@ -814,8 +815,6 @@
   <div class="menu-line"></div>
   <a href="zasebe-finance-pojisteni.html" onclick="closeMobileMenu(); window.location='zasebe-finance-pojisteni.html'; return false;">Pojištění</a>
   <div class="menu-line"></div>
-  <a href="zasebe-finance.html#kontakt" onclick="closeMobileMenu(); window.location='zasebe-finance.html#kontakt'; return false;">Kontakt</a>
-  <div class="menu-line"></div>
   <a href="zasebe-finance.html#o-nas" onclick="closeMobileMenu(); window.location='zasebe-finance.html#o-nas'; return false;">O nás</a>
 </div>
 
@@ -837,7 +836,6 @@
     <li><a href="zasebe-crypto.html">Crypto</a></li>
     <li><a href="zasebe-reality.html">Reality</a></li>
     <li><a href="zasebe-finance-pojisteni.html">Pojištění</a></li>
-    <li><a href="zasebe-finance.html#kontakt">Kontakt</a></li>
     <li><a href="zasebe-finance.html#o-nas">O nás</a></li>
   </ul>
   <button class="nav-cta" onclick="document.querySelector('.cta-section').scrollIntoView({behavior:'smooth'})">Domluvit schůzku</button>
