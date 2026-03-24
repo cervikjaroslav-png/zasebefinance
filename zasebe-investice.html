@@ -371,7 +371,7 @@
     position:relative; z-index:1;
   }
   .btn-primary {
-    background:var(--gold); color:var(--black);
+    background:var(--gold); color:#0A0A0A !important;
     padding:16px 40px; font-size:10px;
     letter-spacing:2.5px; text-transform:uppercase;
     text-decoration:none; font-family:'Montserrat',sans-serif;
@@ -382,8 +382,10 @@
   }
   .btn-primary::before { content:'';position:absolute;inset:0;background:var(--white);transform:translateX(-100%);transition:transform .3s; }
   .btn-primary:hover::before { transform:translateX(0); }
-  .btn-primary span { position:relative;z-index:1; }
-  .btn-primary .arrow { width:16px;height:16px;border:1.5px solid var(--black);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;position:relative;z-index:1; }
+  .btn-primary:hover { color:#0A0A0A !important; }
+  .btn-primary span { position:relative;z-index:1;color:#0A0A0A !important; }
+  .btn-primary .arrow { width:16px;height:16px;border:1.5px solid #0A0A0A;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;position:relative;z-index:1; }
+  .btn-primary .arrow svg path { stroke:#0A0A0A !important; }
 
   /* FOOTER */
   footer { background:var(--black);padding:60px;border-top:1px solid rgba(201,168,76,.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px; }
@@ -827,11 +829,9 @@
 <!-- NAV -->
 <nav id="navbar">
   <a href="zasebe-finance.html" class="logo-wrap">
-    <img src="ZASEBE FINANCE LOGO.png" alt="Zasebe Finance logo" style="height:40px;width:auto;">
     <div class="logo-text">
       <span>Zasebe Finance</span>
       <span>Investice · Reality · Finance</span>
-      <span class="logo-powered">Powered by Estorealis s.r.o.</span>
     </div>
   </a>
   <ul class="nav-links">
@@ -839,7 +839,7 @@
     <li><a href="zasebe-crypto.html">Crypto</a></li>
     <li><a href="zasebe-reality.html">Reality</a></li>
     <li><a href="zasebe-finance-pojisteni.html">Pojištění</a></li>
-    <li><a href="zasebe-finance.html#o-nas">O nás</a></li>
+    <li><a href="zasebe-o-nas.html">O nás</a></li>
   </ul>
   <button class="nav-cta" onclick="document.querySelector('.cta-section').scrollIntoView({behavior:'smooth'})">Domluvit schůzku</button>
 <div class="hamburger" id="hamburger" onclick="toggleMenu()">
