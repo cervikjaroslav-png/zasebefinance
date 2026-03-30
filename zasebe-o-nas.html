@@ -136,6 +136,42 @@
   .section-title { font-family:'Cormorant Garamond',serif;font-size:clamp(34px,3.5vw,52px);font-weight:300;line-height:1.1;color:var(--white); }
   .section-title em { font-style:italic;color:var(--gold); }
 
+  /* FOUNDER PHOTO */
+  .founder-photo {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 2px;
+  }
+  .founder-photo-round {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(201,168,76,.25);
+    margin-bottom: 24px;
+  }
+
+  /* PHOTO GALLERY */
+  .photo-gallery {
+    padding: 0 60px 120px;
+    background: var(--dark2);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px;
+  }
+  .photo-gallery img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    filter: grayscale(30%);
+    transition: filter .4s, transform .4s;
+    border-radius: 2px;
+  }
+  .photo-gallery img:hover {
+    filter: grayscale(0);
+    transform: scale(1.02);
+  }
+
   /* STORY */
   .story {
     padding: 120px 60px;
@@ -504,6 +540,9 @@
     .story { padding:50px 24px !important; }
     .story-inner { grid-template-columns:1fr !important;gap:32px !important; }
     .story-quote { position:static; }
+    .photo-gallery { grid-template-columns:1fr !important;padding:0 24px 50px !important;gap:4px !important; }
+    .photo-gallery img { height:240px !important; }
+    .founder-photo { max-width:300px !important; }
 
     .values { padding:50px 24px !important; }
     .values-header { grid-template-columns:1fr !important;gap:16px !important; }
@@ -609,7 +648,7 @@
   <div class="menu-line"></div>
   <a href="zasebe-reality.html" onclick="closeMobileMenu(); window.location='zasebe-reality.html'; return false;">Reality</a>
   <div class="menu-line"></div>
-  <a href="zasebe-finance-pojisteni.html" onclick="closeMobileMenu(); window.location='zasebe-finance-pojisteni.html'; return false;">Pojištění</a>
+  <a href="zasebe-finance-pojisteni.html" onclick="closeMobileMenu(); window.location='zasebe-finance-pojisteni.html'; return false;">Finance a pojištění</a>
   <div class="menu-line"></div>
   <a href="zasebe-o-nas.html" onclick="closeMobileMenu(); window.location='zasebe-o-nas.html'; return false;">O nás</a>
   <div class="menu-line"></div>
@@ -631,7 +670,7 @@
     <li><a href="zasebe-investice.html">Investice</a></li>
     <li><a href="zasebe-crypto.html">Crypto</a></li>
     <li><a href="zasebe-reality.html">Reality</a></li>
-    <li><a href="zasebe-finance-pojisteni.html">Pojištění</a></li>
+    <li><a href="zasebe-finance-pojisteni.html">Finance a pojištění</a></li>
     <li><a href="zasebe-o-nas.html" class="active">O nás</a></li>
   </ul>
   <button class="nav-cta" onclick="window.location='zasebe-finance.html#kontakt'">Domluvit schůzku</button>
@@ -640,58 +679,30 @@
   </div>
 </nav>
 
-<!-- NÁŠ PŘÍBĚH -->
-<section class="story" id="pribeh" style="padding-top:160px;">
-  <div class="story-inner">
-    <div class="reveal">
-      <div class="section-tag"><span>Můj příběh</span></div>
-      <h2 class="section-title">Proč jsem<br><em>začal</em></h2>
-      <div class="story-text" style="margin-top:28px;">
-        <p>
-          Jmenuji se [jméno] a k financím jsem se dostal v roce 2016 — ne přes školu nebo povinnost, ale vlastní zvědavostí a potřebou pochopit, jak peníze <strong>opravdu fungují</strong>.
-        </p>
-        <p>
-          Jsem investor, sportovec a člověk, který věří, že finance jsou jen jedna část většího celku. Bez správné hlavy a zdravého těla jsou i ty nejlepší čísla k ničemu. Aktivně sportuju od pěti let a vím, jak moc záleží na tom, v jaké jsi hlavě — zvlášť dnes, kdy se na nás každý den valí tuny převážně negativních informací.
-        </p>
-        <p>
-          Sedm let jsem pracoval v prodeji luxusních automobilů, tři roky žil v Londýně a od roku 2020 podnikám. Čísla mě baví odjakživa — ale za každým číslem stojí člověk. Od roku 2023 se aktivně pohybuji také ve světě realit, který přirozeně doplňuje celý mozaiku toho, co dělám.
-        </p>
-      </div>
-    </div>
-    <div class="reveal reveal-delay-1">
-      <div class="story-quote">
-        <p class="story-quote-text">„Chci, aby lidé rozuměli tomu, co mají. A proč to mají."</p>
-        <span class="story-quote-author">[jméno], zakladatel</span>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- PROČ TO DĚLÁM -->
-<section class="story" id="proc" style="background:var(--black);">
+<section class="story" id="proc" style="padding-top:160px; background:var(--black);">
   <div class="story-inner">
     <div class="reveal">
       <div class="section-tag"><span>Proč to dělám</span></div>
-      <h2 class="section-title">Změna začíná tam,<br>kde končí <em>trpělivost</em></h2>
+      <h2 class="section-title">Nejde být<br><em>neutrální</em></h2>
       <div class="story-text" style="margin-top:28px;">
         <p>
-          Banky a někteří poradci si účtují poplatky, které neodpovídají reálné hodnotě. Produkty se prodávají ne proto, že jsou dobré pro klienta, ale proto, že nesou <strong>největší provizi</strong>. A to mě irituje.
+          Na jedné straně banky s poplatky, které neodpovídají ničemu. Poradci, co prodávají to, co jim nese nejvíc — ne to, co je dobré pro Vás. Systém, kde klient platí a neví za co.
         </p>
         <p>
-          Tento projekt vznikl jako přímá konkurence těm, kteří tohle považují za normální. Poplatky chápu — ale měly by odpovídat skutečné práci a klient by měl vždy přesně vědět, <strong>za co platí</strong>.
+          Na druhé straně to jde řešit jinak.
         </p>
         <p>
-          Jako dvacetiletý kluk jsem podepsal předraženou pojistku a spotřebitelský úvěr — věřil jsem lidem, kteří mi prodali to, za co měli největší provizi, ne to, co bylo dobré pro mě. Tuhle zkušenost jsem nezapomněl.
-        </p>
-        <p>
-          Chci, aby lidé rozuměli tomu, co mají. A proč to mají.
+          Řekneme si, co děláme, proč nemáme rádi, jak to dělají druzí — a pustíme se do práce.
         </p>
       </div>
     </div>
-    <div class="reveal reveal-delay-1">
-      <div class="story-quote">
-        <p class="story-quote-text">„Poplatky chápu — ale měly by odpovídat skutečné práci a klient by měl vždy přesně vědět, za co platí."</p>
-        <span class="story-quote-author">[jméno], zakladatel</span>
+    <div class="reveal reveal-delay-1" style="display:flex;flex-direction:column;align-items:center;">
+      <div class="story-quote" style="width:100%;text-align:center;display:flex;flex-direction:column;align-items:center;">
+        <img src="Jaroslav Červík - Kulatá fotka.png" alt="Jaroslav Červík" class="founder-photo-round">
+        <span class="story-quote-author" style="margin-bottom:4px;">Jaroslav Červík, zakladatel</span>
+        <p style="font-size:14px;color:rgba(245,240,232,.55);font-weight:300;margin-bottom:24px;">K financím i realitám jsem se dostal praxí, ne teorií.</p>
+        <p class="story-quote-text">„Čísla mě baví. Ale za každým číslem stojí člověk — a ten člověk by měl vědět, za co platí."</p>
       </div>
     </div>
   </div>
@@ -734,7 +745,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-copy">© 2025 Zasebe Finance. Všechna práva vyhrazena.</div>
+  <div class="footer-copy">© 2026 Zasebe Finance. Všechna práva vyhrazena.</div>
   <div class="footer-links">
     <a href="#">Cookies</a>
     <a href="#">Zásady ochrany osobních údajů</a>
